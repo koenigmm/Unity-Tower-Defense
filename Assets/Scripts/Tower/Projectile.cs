@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private MoverForSimplePaths enemyMoverForSimplePaths;
     [SerializeField] private float speed;
+    [SerializeField][Range(0, 200)] private int damage = 50;
     [SerializeField] private float maxFlightDuration = 4f;
     [SerializeField] private bool _bIsHoming = true;
+    [SerializeField]private Health _enemyHealth;
 
     private void Start()
     {
@@ -16,7 +17,7 @@ public class Projectile : MonoBehaviour
     {
         transform.Translate(Vector3.forward * (speed * Time.deltaTime));
         if (!_bIsHoming) return;
-        transform.LookAt(enemyMoverForSimplePaths.transform.position);
+        transform.LookAt(_enemyHealth.transform.position);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -24,7 +25,10 @@ public class Projectile : MonoBehaviour
         float collisionDestroyTime = 1.5f;
         Destroy(gameObject, collisionDestroyTime);
 
-        Debug.Log("Collision" + collision.transform.name);
-
+        if (collision.gameObject.TryGetComponent(out Health enemyHealth))
+        {
+            enemyHealth.GetDamage(damage);
+            Destroy(gameObject);
+        }
     }
 }
