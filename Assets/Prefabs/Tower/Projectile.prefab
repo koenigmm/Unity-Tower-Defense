@@ -111,9 +111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccef66b543e8bd14b8d0574243509b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMoverForSimplePaths: {fileID: 0}
   speed: 50
-  maxFlightDuration: 50
+  damage: 25
+  maxFlightDuration: 5
+  _bIsHoming: 1
 --- !u!54 &144347110006321982
 Rigidbody:
   m_ObjectHideFlags: 0

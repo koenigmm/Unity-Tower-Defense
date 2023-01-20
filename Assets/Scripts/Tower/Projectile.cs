@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
     [SerializeField][Range(0, 200)] private int damage = 50;
     [SerializeField] private float maxFlightDuration = 4f;
     [SerializeField] private bool _bIsHoming = true;
-    [SerializeField]private Health _enemyHealth;
+    private Health _enemyHealth;
 
     private void Start()
     {
@@ -17,6 +17,7 @@ public class Projectile : MonoBehaviour
     {
         transform.Translate(Vector3.forward * (speed * Time.deltaTime));
         if (!_bIsHoming) return;
+        if (_enemyHealth == null) return;
         transform.LookAt(_enemyHealth.transform.position);
     }
 
@@ -31,4 +32,6 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void SetTarget(Health healthComponentAsTarget) => _enemyHealth = healthComponentAsTarget;
 }

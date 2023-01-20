@@ -14,12 +14,10 @@ public class Health : MonoBehaviour
     {
         int lowestPossibleHealthPoints = 0;
         _currentHealth = Mathf.Max(lowestPossibleHealthPoints, _currentHealth - damage);
-        print("get damage");
 
         if (_currentHealth == 0)
         {
             Destroy(gameObject);
-            print(transform.name + "deleted");
         }
     }
 }
