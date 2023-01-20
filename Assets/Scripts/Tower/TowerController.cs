@@ -64,23 +64,10 @@ public class TowerController : MonoBehaviour
         FindClosestTarget();
     }
 
-
-    private void CleanEnemyHealthList()
-    {
-        foreach (var enemy in enemies)
-        {
-            if (enemy == null)
-            {
-                enemies.Remove(enemy);
-                FindClosestTarget();
-            }
-        }
-    }
-
     private void FindClosestTarget()
     {
         if (enemies.Count == 0) return;
-        
+
         float closestDistance = Mathf.Infinity;
         Enemy target = null;
 
