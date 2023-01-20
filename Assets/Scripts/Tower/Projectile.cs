@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
     [SerializeField][Range(0, 200)] private int damage = 50;
     [SerializeField] private float maxFlightDuration = 4f;
     [SerializeField] private bool _bIsHoming = true;
-    private Health _enemyHealth;
+    private Enemy enemy;
 
     private void Start()
     {
@@ -17,8 +17,8 @@ public class Projectile : MonoBehaviour
     {
         transform.Translate(Vector3.forward * (speed * Time.deltaTime));
         if (!_bIsHoming) return;
-        if (_enemyHealth == null) return;
-        transform.LookAt(_enemyHealth.transform.position);
+        if (enemy == null) return;
+        transform.LookAt(enemy.transform.position);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -33,5 +33,5 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public void SetTarget(Health healthComponentAsTarget) => _enemyHealth = healthComponentAsTarget;
+    public void SetTarget(Enemy enemy) => this.enemy = enemy;
 }
