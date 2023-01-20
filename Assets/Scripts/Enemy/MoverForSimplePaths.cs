@@ -5,18 +5,13 @@ using UnityEngine;
 public class MoverForSimplePaths : MonoBehaviour
 {
     [SerializeField] private List<Cell> waypoints = new();
-    [SerializeField] [Range(0f,5f)] float speed = 1.0f;
+    [SerializeField][Range(0f, 5f)] float speed = 1.0f;
 
     private void Start()
     {
+        if (transform.position != waypoints[0].transform.position) TeleportToFirstWaypoint();
         StartCoroutine(PrintWaypointsNames());
     }
-
-    private void Update()
-    {
-
-    }
-
     IEnumerator PrintWaypointsNames()
     {
         foreach (var waypoint in waypoints)
@@ -37,4 +32,6 @@ public class MoverForSimplePaths : MonoBehaviour
             // yield return new WaitForSeconds(timeBetweenTwoWaypoints);
         }
     }
+
+    private void TeleportToFirstWaypoint() => transform.position = waypoints[0].transform.position;
 }
