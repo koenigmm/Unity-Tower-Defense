@@ -32,7 +32,7 @@ public class TowerController : MonoBehaviour
     void Update()
     {
         AimWeapon();
-        FindClosestTarget();
+        FindAndSetClosestTarget();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -61,10 +61,10 @@ public class TowerController : MonoBehaviour
 
         enemy.OnDestroyed -= RemoveEnemyFromList;
         enemies.Remove(enemy);
-        FindClosestTarget();
+        FindAndSetClosestTarget();
     }
 
-    private void FindClosestTarget()
+    private void FindAndSetClosestTarget()
     {
         if (enemies.Count == 0) return;
 
@@ -80,7 +80,7 @@ public class TowerController : MonoBehaviour
                 target = enemy;
             }
         }
-        closestEnemy = target; ;
+        closestEnemy = target;
     }
 
     private void AimWeapon()
