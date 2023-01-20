@@ -25,5 +25,6 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject, collisionDestroyTime);
 
         Debug.Log("Collision" + collision.transform.name);
+
     }
 }
