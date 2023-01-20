@@ -7,9 +7,13 @@ public class MoverForSimplePaths : MonoBehaviour
     [SerializeField] private List<Cell> waypoints = new();
     [SerializeField][Range(0f, 5f)] float speed = 1.0f;
 
-    private void Start()
+    private void Awake()
     {
         if (transform.position != waypoints[0].transform.position) TeleportToFirstWaypoint();
+    }
+
+    private void Start()
+    {
         StartCoroutine(PrintWaypointsNames());
     }
     IEnumerator PrintWaypointsNames()
@@ -27,9 +31,6 @@ public class MoverForSimplePaths : MonoBehaviour
                 transform.position = Vector3.Lerp(startPosition, waypoint.transform.position, travelPercentage);
                 yield return new WaitForEndOfFrame();
             }
-
-
-            // yield return new WaitForSeconds(timeBetweenTwoWaypoints);
         }
     }
 
