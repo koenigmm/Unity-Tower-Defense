@@ -131,6 +131,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellType: 1
+  towerPrefab: {fileID: 8704696727299002722, guid: 0c2adcc53c996e446b6d828beeac532d,
+    type: 3}
+  towerParentTag: towerparent
 --- !u!65 &693259808817541586
 BoxCollider:
   m_ObjectHideFlags: 0
