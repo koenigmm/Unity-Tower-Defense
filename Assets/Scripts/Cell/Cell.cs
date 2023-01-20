@@ -28,8 +28,8 @@ public class Cell : MonoBehaviour
     private void OnMouseDown()
     {
         if (!b_isPlaceable) return;
-        // print(transform.name);
         Instantiate(towerPrefab, transform.position, Quaternion.identity, towerParent.transform);
+        cellType = CellType.Tower;
     }
 
     public void SetCellTypeToTower()
