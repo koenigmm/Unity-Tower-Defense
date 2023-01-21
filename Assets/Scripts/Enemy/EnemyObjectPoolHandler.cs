@@ -6,16 +6,14 @@ using UnityEngine;
 public class EnemyObjectPoolHandler : MonoBehaviour
 {
     public Action OnWaveCleared;
-    public int Wave {get => wave;}
+    public int Wave { get => wave; }
     public bool _bShouldStartWave = true;
     [SerializeField] private int defeatedEnemies;
     [SerializeField] private float timeBetwwenEnemySpawn = 2f;
     private int _amountOfEnemiesInPool;
     private int wave = 1;
     private List<Health> enemies = new();
-
-    //testing
-    private bool waveCleard;
+    private bool _bWaveCleard;
 
     void Awake()
     {
@@ -32,26 +30,25 @@ public class EnemyObjectPoolHandler : MonoBehaviour
 
     private void Update()
     {
-        if (waveCleard)
-            HandleClearedWave();
-
         if (!_bShouldStartWave)
             return;
 
         StartCoroutine(StartWave());
     }
 
-    void OnDisable()
-    {
-        RemoveAllEventListeners();
-    }
+    void OnDisable() => RemoveAllEventListeners();
 
     IEnumerator StartWave()
     {
+        _bWaveCleard = false;
         _bShouldStartWave = false;
         var counter = 0;
+        
         while (counter < wave && wave < _amountOfEnemiesInPool)
         {
+            if (_bWaveCleard)
+                break;
+
             var currentEnemy = enemies[counter];
             currentEnemy.gameObject.SetActive(true);
             currentEnemy.OnDie += HandleDeath;
@@ -63,10 +60,16 @@ public class EnemyObjectPoolHandler : MonoBehaviour
 
     void HandleDeath(Health health)
     {
-        defeatedEnemies++;
-        if (defeatedEnemies == wave) waveCleard = true;
-        Debug.Log("handle death");
         health.OnDie -= HandleDeath;
+        defeatedEnemies++;
+
+        if (defeatedEnemies == wave)
+            _bWaveCleard = true;
+
+        Debug.Log("handle death");
+
+        if (_bWaveCleard)
+            HandleClearedWave();
     }
 
     void RemoveAllEventListeners()
@@ -81,7 +84,6 @@ public class EnemyObjectPoolHandler : MonoBehaviour
     {
         print("wave cleared | testing");
         defeatedEnemies = 0;
-        waveCleard = false;
         wave++;
         OnWaveCleared?.Invoke();
     }

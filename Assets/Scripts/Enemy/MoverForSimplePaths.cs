@@ -22,9 +22,9 @@ public class MoverForSimplePaths : MonoBehaviour
 
     private void OnDisable()
     {
-        // _waypoints.Clear();
         StopAllCoroutines();
     }
+    
     IEnumerator Move()
     {
         foreach (var waypoint in _waypoints)

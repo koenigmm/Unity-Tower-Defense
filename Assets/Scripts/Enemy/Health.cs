@@ -7,15 +7,11 @@ public class Health : MonoBehaviour
     [SerializeField] int maxHealth = 100;
     private int _currentHealth;
 
-    private void Awake()
-    {
-        _currentHealth = maxHealth;
-    }
+    private void Awake() => _currentHealth = maxHealth;
 
-    private void OnEnable()
-    {
-        _currentHealth = maxHealth;
-    }
+    private void OnEnable() => _currentHealth = maxHealth;
+
+    private void OnDisable() => OnDie?.Invoke(this);
 
     public void GetDamage(int damage)
     {
@@ -23,11 +19,6 @@ public class Health : MonoBehaviour
         _currentHealth = Mathf.Max(lowestPossibleHealthPoints, _currentHealth - damage);
 
         if (_currentHealth == 0)
-        {
-            OnDie?.Invoke(this);
             gameObject.SetActive(false);
-            //TODO Remove
-            // Destroy(gameObject);
-        }
     }
 }
