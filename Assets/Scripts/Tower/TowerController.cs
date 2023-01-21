@@ -8,6 +8,8 @@ public class TowerController : MonoBehaviour
     [SerializeField] private float timeBetweenAttacks;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float range = 30f;
+    // Testing
+    public float Range {get => range;}
     private List<Enemy> _enemies = new();
     private SphereCollider _sphereCollider;
     private Enemy _closestEnemy;

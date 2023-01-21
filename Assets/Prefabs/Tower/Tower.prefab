@@ -150,8 +150,6 @@ MonoBehaviour:
   projectilePrefab: {fileID: 6470339120188991406, guid: 41ed4554daaa6ac42933184a32d1be51,
     type: 3}
   range: 30
-  enemies: []
-  closestEnemy: {fileID: 0}
 --- !u!135 &-6481585620254759246
 SphereCollider:
   m_ObjectHideFlags: 0
