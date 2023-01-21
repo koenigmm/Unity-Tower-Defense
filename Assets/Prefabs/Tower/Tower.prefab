@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8704696726537065954}
   - component: {fileID: 8704696726537065955}
   - component: {fileID: 8704696726537065980}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Direction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: -8928362692298354459}
   - component: {fileID: -6481585620254759246}
   - component: {fileID: -4173830765188787691}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,9 @@ MonoBehaviour:
   timeBetweenAttacks: 2
   projectilePrefab: {fileID: 6470339120188991406, guid: 41ed4554daaa6ac42933184a32d1be51,
     type: 3}
-  enemyHealth: {fileID: 0}
+  range: 30
+  enemies: []
+  closestEnemy: {fileID: 0}
 --- !u!135 &-6481585620254759246
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -191,7 +193,7 @@ GameObject:
   - component: {fileID: 8704696727804569909}
   - component: {fileID: 8704696727804569910}
   - component: {fileID: 8704696727804569911}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +291,7 @@ GameObject:
   - component: {fileID: 8704696727810112370}
   - component: {fileID: 8704696727810112371}
   - component: {fileID: 8704696727810112268}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
