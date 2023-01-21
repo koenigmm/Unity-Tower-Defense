@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyObjectPoolHandler : MonoBehaviour
 {
+    public Action OnWaveCleared;
+    public int Wave {get => wave;}
     public bool _bShouldStartWave = true;
     [SerializeField] private int defeatedEnemies;
     [SerializeField] private float timeBetwwenEnemySpawn = 2f;
@@ -30,14 +33,11 @@ public class EnemyObjectPoolHandler : MonoBehaviour
     private void Update()
     {
         if (waveCleard)
-        {
-            print("wave cleared | testing");
-            defeatedEnemies = 0;
-            waveCleard = false;
-            wave++;
-        }
+            HandleClearedWave();
 
-        if (!_bShouldStartWave) return;
+        if (!_bShouldStartWave)
+            return;
+
         StartCoroutine(StartWave());
     }
 
@@ -75,5 +75,14 @@ public class EnemyObjectPoolHandler : MonoBehaviour
         {
             enemy.OnDie -= HandleDeath;
         }
+    }
+
+    private void HandleClearedWave()
+    {
+        print("wave cleared | testing");
+        defeatedEnemies = 0;
+        waveCleard = false;
+        wave++;
+        OnWaveCleared?.Invoke();
     }
 }
