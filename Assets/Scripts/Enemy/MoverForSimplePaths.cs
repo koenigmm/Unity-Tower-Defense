@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class MoverForSimplePaths : MonoBehaviour
 {
-    [SerializeField] private List<Cell> waypoints = new();
     [SerializeField][Range(0f, 5f)] float speed = 1.0f;
-
-    private void Awake()
-    {
-        if (transform.position != waypoints[0].transform.position) TeleportToFirstWaypoint();
-    }
+    [SerializeField] private string pathTag = "Path";
+    private List<Cell> _waypoints = new();
 
     private void Start()
     {
-        StartCoroutine(PrintWaypointsNames());
+        FindPathAndFillList();
+        if (transform.position != _waypoints[0].transform.position) TeleportToFirstWaypoint();
+        StartCoroutine(Move());
     }
-    IEnumerator PrintWaypointsNames()
+    IEnumerator Move()
     {
-        foreach (var waypoint in waypoints)
+        foreach (var waypoint in _waypoints)
         {
+            if (waypoint.b_isStart) continue;
+
             Vector3 startPosition = transform.position;
             float travelPercentage = 0f;
 
@@ -31,8 +31,22 @@ public class MoverForSimplePaths : MonoBehaviour
                 transform.position = Vector3.Lerp(startPosition, waypoint.transform.position, travelPercentage);
                 yield return new WaitForEndOfFrame();
             }
+
+        }
+        // TODO Steal lives
+        Destroy(gameObject);
+    }
+
+    private void FindPathAndFillList()
+    {
+        var path = GameObject.FindGameObjectWithTag(pathTag);
+        var cells = path.GetComponentsInChildren<Cell>();
+
+        foreach (var cell in cells)
+        {
+            _waypoints.Add(cell);
         }
     }
 
-    private void TeleportToFirstWaypoint() => transform.position = waypoints[0].transform.position;
+    private void TeleportToFirstWaypoint() => transform.position = _waypoints[0].transform.position;
 }

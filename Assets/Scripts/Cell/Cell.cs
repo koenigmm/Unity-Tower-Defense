@@ -6,7 +6,10 @@ public enum CellType
 {
     Tower,
     Grass,
-    Way
+    Way,
+    Start,
+    End,
+    Blocked
 }
 
 public class Cell : MonoBehaviour
@@ -16,6 +19,7 @@ public class Cell : MonoBehaviour
     [SerializeField] string towerParentTag;
     [SerializeField] Material rangeDisplayMaterial;
     public bool b_isPlaceable { get => cellType == CellType.Grass; }
+    public bool b_isStart { get => cellType == CellType.Start; }
     private GameObject _towerParent;
     private GameObject _sphere;
     private bool _bIsInBuildMode = true; //testing
