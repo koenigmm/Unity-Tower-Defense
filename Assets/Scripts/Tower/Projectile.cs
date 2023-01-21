@@ -23,14 +23,12 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        float collisionDestroyTime = 1.5f;
-        Destroy(gameObject, collisionDestroyTime);
-
         if (collision.gameObject.TryGetComponent(out Health enemyHealth))
         {
             enemyHealth.GetDamage(damage);
-            Destroy(gameObject);
         }
+
+        Destroy(gameObject);
     }
 
     public void SetTarget(Health enemy) => this.enemy = enemy;
