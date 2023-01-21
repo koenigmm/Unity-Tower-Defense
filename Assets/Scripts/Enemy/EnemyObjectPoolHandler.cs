@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class EnemyObjectPoolHandler : MonoBehaviour
 {
-    private int _amountOfEnemies = 0;
-    [SerializeField]private int defeatedEnemies;
-    private int wave = 5;
+    public bool _bShouldStartWave = true;
+    [SerializeField] private int defeatedEnemies;
+    [SerializeField] private float timeBetwwenEnemySpawn = 2f;
+    private int _amountOfEnemiesInPool;
+    private int wave = 1;
     private List<Health> enemies = new();
+
+    //testing
+    private bool waveCleard;
 
     void Awake()
     {
@@ -15,13 +20,24 @@ public class EnemyObjectPoolHandler : MonoBehaviour
 
         foreach (var enemy in enemiesInChildren)
         {
-            enemies.Add(enemy);   
+            enemies.Add(enemy);
             enemy.gameObject.SetActive(false);
         }
+
+        _amountOfEnemiesInPool = enemies.Count;
     }
 
-    void Start()
+    private void Update()
     {
+        if (waveCleard)
+        {
+            print("wave cleared | testing");
+            defeatedEnemies = 0;
+            waveCleard = false;
+            wave++;
+        }
+
+        if (!_bShouldStartWave) return;
         StartCoroutine(StartWave());
     }
 
@@ -32,20 +48,23 @@ public class EnemyObjectPoolHandler : MonoBehaviour
 
     IEnumerator StartWave()
     {
+        _bShouldStartWave = false;
         var counter = 0;
-        while (counter < wave)
+        while (counter < wave && wave < _amountOfEnemiesInPool)
         {
             var currentEnemy = enemies[counter];
             currentEnemy.gameObject.SetActive(true);
             currentEnemy.OnDie += HandleDeath;
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(timeBetwwenEnemySpawn);
             counter++;
         }
+
     }
 
     void HandleDeath(Health health)
     {
         defeatedEnemies++;
+        if (defeatedEnemies == wave) waveCleard = true;
         Debug.Log("handle death");
         health.OnDie -= HandleDeath;
     }
@@ -54,7 +73,7 @@ public class EnemyObjectPoolHandler : MonoBehaviour
     {
         foreach (var enemy in enemies)
         {
-            enemy.OnDie -= HandleDeath; 
+            enemy.OnDie -= HandleDeath;
         }
     }
 }
