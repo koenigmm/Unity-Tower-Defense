@@ -5,6 +5,7 @@ public class WaveDisplay : MonoBehaviour
 {
     [SerializeField] private EnemyObjectPoolHandler enemyObjectPoolHandler;
     [SerializeField] private TextMeshProUGUI waveDisplayCounterText;
+    [SerializeField] private TextMeshProUGUI waveStatusText;
 
     private void Awake()
     {
@@ -14,9 +15,26 @@ public class WaveDisplay : MonoBehaviour
 
     private void Start() => UpdateWaveDisplay();
 
-    private void OnEnable() => enemyObjectPoolHandler.OnWaveCleared += UpdateWaveDisplay;
+    private void Update()
+    {
 
-    private void OnDisable() => enemyObjectPoolHandler.OnWaveCleared -= UpdateWaveDisplay;
+    }
 
-    private void UpdateWaveDisplay() => waveDisplayCounterText.text = enemyObjectPoolHandler.Wave.ToString();
+    private void OnEnable() => enemyObjectPoolHandler.OnPhaseChange += UpdateWaveDisplay;
+
+    private void OnDisable() => enemyObjectPoolHandler.OnPhaseChange -= UpdateWaveDisplay;
+
+    private void UpdateWaveDisplay()
+    {
+        waveDisplayCounterText.text = enemyObjectPoolHandler.Wave.ToString();
+
+        if (enemyObjectPoolHandler.B_WaveCleared)
+        {
+            waveStatusText.text = "Build Phase";
+        }
+        else
+        {
+            waveStatusText.text = "Wave Phase";
+        }
+    }
 }

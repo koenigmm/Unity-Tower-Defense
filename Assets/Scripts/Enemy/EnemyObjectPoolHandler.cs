@@ -5,15 +5,17 @@ using UnityEngine;
 
 public class EnemyObjectPoolHandler : MonoBehaviour
 {
-    public Action OnWaveCleared;
+    public Action OnPhaseChange;
     public int Wave { get => wave; }
-    public bool _bShouldStartWave = true;
+    public bool B_WaveCleared { get => _bWaveCleard; }
     [SerializeField] private int defeatedEnemies;
     [SerializeField] private float timeBetwwenEnemySpawn = 2f;
     private int _amountOfEnemiesInPool;
     private int wave = 1;
     private List<Health> enemies = new();
-    private bool _bWaveCleard;
+    private bool _bWaveCleard = true;
+    public bool _bShouldStartWave;
+
 
     void Awake()
     {
@@ -34,6 +36,8 @@ public class EnemyObjectPoolHandler : MonoBehaviour
             return;
 
         StartCoroutine(StartWave());
+        OnPhaseChange?.Invoke();
+        print("phase change");
     }
 
     void OnDisable() => RemoveAllEventListeners();
@@ -64,7 +68,10 @@ public class EnemyObjectPoolHandler : MonoBehaviour
         defeatedEnemies++;
 
         if (defeatedEnemies == wave)
+        {
             _bWaveCleard = true;
+            OnPhaseChange?.Invoke();
+        }
 
         Debug.Log("handle death");
 
@@ -85,6 +92,6 @@ public class EnemyObjectPoolHandler : MonoBehaviour
         print("wave cleared | testing");
         defeatedEnemies = 0;
         wave++;
-        OnWaveCleared?.Invoke();
+        OnPhaseChange?.Invoke();
     }
 }
