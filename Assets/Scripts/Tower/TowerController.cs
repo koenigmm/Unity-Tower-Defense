@@ -8,13 +8,11 @@ public class TowerController : MonoBehaviour
     [SerializeField] private float timeBetweenAttacks;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float range = 30f;
-    [SerializeField] private List<Enemy> enemies = new();
+    private List<Enemy> _enemies = new();
     private SphereCollider _sphereCollider;
+    private Enemy _closestEnemy;
     private float _timer;
-
-    // Target
-    [SerializeField] private Enemy closestEnemy;
-    private bool canShoot = true;
+    private bool _bCanShoot = true;
 
     private void Awake()
     {
@@ -25,7 +23,7 @@ public class TowerController : MonoBehaviour
     void Start()
     {
         _sphereCollider.radius = range;
-        if (closestEnemy == null) return;
+        if (_closestEnemy == null) return;
     }
 
     // Update is called once per frame
@@ -39,7 +37,7 @@ public class TowerController : MonoBehaviour
     {
         if (other.TryGetComponent(out Enemy enemy))
         {
-            enemies.Add(enemy);
+            _enemies.Add(enemy);
             enemy.OnDestroyed += RemoveEnemyFromList;
         }
     }
@@ -54,24 +52,24 @@ public class TowerController : MonoBehaviour
 
     private void RemoveEnemyFromList(Enemy enemy)
     {
-        if (closestEnemy == enemy)
+        if (_closestEnemy == enemy)
         {
-            closestEnemy = null;
+            _closestEnemy = null;
         }
 
         enemy.OnDestroyed -= RemoveEnemyFromList;
-        enemies.Remove(enemy);
+        _enemies.Remove(enemy);
         FindAndSetClosestTarget();
     }
 
     private void FindAndSetClosestTarget()
     {
-        if (enemies.Count == 0) return;
+        if (_enemies.Count == 0) return;
 
         float closestDistance = Mathf.Infinity;
         Enemy target = null;
 
-        foreach (var enemy in enemies)
+        foreach (var enemy in _enemies)
         {
             float enemyDistance = Vector3.Distance(enemy.transform.position, transform.position);
             if (enemyDistance < closestDistance)
@@ -80,17 +78,17 @@ public class TowerController : MonoBehaviour
                 target = enemy;
             }
         }
-        closestEnemy = target;
+        _closestEnemy = target;
     }
 
     private void AimWeapon()
     {
         HandleTimer();
         //TODO restrict to y rotation?
-        if (closestEnemy == null) return;
-        towerTop.LookAt(closestEnemy.transform);
+        if (_closestEnemy == null) return;
+        towerTop.LookAt(_closestEnemy.transform);
 
-        if (canShoot) FireWeapon();
+        if (_bCanShoot) FireWeapon();
     }
 
     private void HandleTimer()
@@ -100,15 +98,14 @@ public class TowerController : MonoBehaviour
         if (_timer < timeBetweenAttacks) return;
 
         _timer = 0f;
-        canShoot = true;
+        _bCanShoot = true;
     }
 
     private void FireWeapon()
     {
-        print("fire");
         GameObject projectile = Instantiate(projectilePrefab, towerTop.transform.position, Quaternion.identity);
-        projectile.GetComponent<Projectile>().SetTarget(closestEnemy);
-        canShoot = false;
+        projectile.GetComponent<Projectile>().SetTarget(_closestEnemy);
+        _bCanShoot = false;
     }
 
 }
