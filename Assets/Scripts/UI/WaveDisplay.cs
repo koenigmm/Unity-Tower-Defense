@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -14,23 +12,11 @@ public class WaveDisplay : MonoBehaviour
         enemyObjectPoolHandler = FindObjectOfType<EnemyObjectPoolHandler>();
     }
 
-    private void Start()
-    {
-        UpdateWaveDisplay();
-    }
+    private void Start() => UpdateWaveDisplay();
 
-    private void OnEnable()
-    {
-        enemyObjectPoolHandler.OnWaveCleared += UpdateWaveDisplay;
-    }
+    private void OnEnable() => enemyObjectPoolHandler.OnWaveCleared += UpdateWaveDisplay;
 
-    private void OnDisable()
-    {
-        enemyObjectPoolHandler.OnWaveCleared -= UpdateWaveDisplay;
-    }
+    private void OnDisable() => enemyObjectPoolHandler.OnWaveCleared -= UpdateWaveDisplay;
 
-    private void UpdateWaveDisplay()
-    {
-        waveDisplayCounterText.text = enemyObjectPoolHandler.Wave.ToString();
-    }
+    private void UpdateWaveDisplay() => waveDisplayCounterText.text = enemyObjectPoolHandler.Wave.ToString();
 }
