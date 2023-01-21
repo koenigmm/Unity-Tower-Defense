@@ -38,7 +38,6 @@ public class Cell : MonoBehaviour
         CreateRangeDisplay();
     }
 
-
     private void OnMouseDown()
     {
         if (!b_isPlaceable) return;
@@ -74,18 +73,21 @@ public class Cell : MonoBehaviour
         // TODO Range and damage in sperate data class or scriptable object?
         // TODO Remove the following testing line
         // diameter = 2 x radius (sphere collider from tower prefab)
-        _currentTowerPrefabRange = towerPrefab.GetComponent<TowerController>().Range * 2; //testing
+        _currentTowerPrefabRange = towerPrefab.GetComponent<TowerController>().Range * 2f;
 
+        float sphereYScale = _currentTowerPrefabRange / 10f;
+        const float sphereYTranlateFactor = 1f;
 
         _sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        _sphere.transform.localScale = new Vector3(_currentTowerPrefabRange, _currentTowerPrefabRange, _currentTowerPrefabRange);
+        _sphere.transform.localScale = new Vector3(_currentTowerPrefabRange, sphereYScale, _currentTowerPrefabRange);
         _sphere.SetActive(false);
         _sphere.transform.position = transform.position;
+        _sphere.transform.Translate(Vector3.up * sphereYTranlateFactor);
         _sphere.GetComponent<Collider>().enabled = false;
         var renderer = _sphere.GetComponent<Renderer>();
         renderer.material = rangeDisplayMaterial;
         renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-        _sphere.transform.SetParent(transform);  
+        _sphere.transform.SetParent(transform);
     }
 
     private void CreateParentGameObject()

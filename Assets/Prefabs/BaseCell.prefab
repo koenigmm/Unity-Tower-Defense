@@ -135,7 +135,7 @@ MonoBehaviour:
   towerPrefab: {fileID: 8704696727299002722, guid: 0c2adcc53c996e446b6d828beeac532d,
     type: 3}
   towerParentTag: towerparent
-  rangeDisplayMaterial: {fileID: 2100000, guid: f22d8e63b7d3fe343a2db5dd638739b2,
+  rangeDisplayMaterial: {fileID: 2100000, guid: 573f6cb1b20c13d41b1410546d90d9d3,
     type: 2}
 --- !u!65 &693259808817541586
 BoxCollider:
