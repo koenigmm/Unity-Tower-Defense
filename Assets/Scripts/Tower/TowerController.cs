@@ -10,9 +10,11 @@ public class TowerController : MonoBehaviour
     [SerializeField] private float range = 30f;
     [SerializeField] private List<Enemy> enemies = new();
     private SphereCollider _sphereCollider;
+    private float _timer;
 
     // Target
     [SerializeField] private Enemy closestEnemy;
+    private bool canShoot = true;
 
     private void Awake()
     {
@@ -24,8 +26,6 @@ public class TowerController : MonoBehaviour
     {
         _sphereCollider.radius = range;
         if (closestEnemy == null) return;
-        // StartCoroutine(FireWeapon());
-
     }
 
     // Update is called once per frame
@@ -48,7 +48,7 @@ public class TowerController : MonoBehaviour
     {
         if (other.TryGetComponent(out Enemy enemy))
         {
-            enemies.Remove(enemy);
+            RemoveEnemyFromList(enemy);
         }
     }
 
@@ -85,23 +85,31 @@ public class TowerController : MonoBehaviour
 
     private void AimWeapon()
     {
+        HandleTimer();
         //TODO restrict to y rotation?
         if (closestEnemy == null) return;
         towerTop.LookAt(closestEnemy.transform);
+
+        if (canShoot) FireWeapon();
     }
 
-    private IEnumerator FireWeapon()
+    private void HandleTimer()
     {
-        int counter = 0;
+        _timer += Time.deltaTime;
 
-        while (counter < 4)
-        {
-            if (closestEnemy == null) break;
-            GameObject projectile = Instantiate(projectilePrefab, towerTop.transform.position, Quaternion.identity);
-            projectile.GetComponent<Projectile>().SetTarget(closestEnemy);
-            yield return new WaitForSeconds(timeBetweenAttacks);
-            counter++;
-        }
+        if (_timer < timeBetweenAttacks) return;
 
+        _timer = 0f;
+        canShoot = true;
     }
+
+    private void FireWeapon()
+    {
+        print("fire");
+        GameObject projectile = Instantiate(projectilePrefab, towerTop.transform.position, Quaternion.identity);
+        projectile.GetComponent<Projectile>().SetTarget(closestEnemy);
+        canShoot = false;
+    }
+
 }
+
