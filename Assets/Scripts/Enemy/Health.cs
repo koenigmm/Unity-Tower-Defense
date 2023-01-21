@@ -1,11 +1,18 @@
+using System;
 using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    public event Action<Health> OnDie;
     [SerializeField] int maxHealth = 100;
     private int _currentHealth;
 
     private void Awake()
+    {
+        _currentHealth = maxHealth;
+    }
+
+    private void OnEnable()
     {
         _currentHealth = maxHealth;
     }
@@ -17,7 +24,10 @@ public class Health : MonoBehaviour
 
         if (_currentHealth == 0)
         {
-            Destroy(gameObject);
+            OnDie?.Invoke(this);
+            gameObject.SetActive(false);
+            //TODO Remove
+            // Destroy(gameObject);
         }
     }
 }

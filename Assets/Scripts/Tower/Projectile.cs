@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
     [SerializeField][Range(0, 200)] private int damage = 50;
     [SerializeField] private float maxFlightDuration = 4f;
     [SerializeField] private bool _bIsHoming = true;
-    private Enemy enemy;
+    private Health enemy;
 
     private void Start()
     {
@@ -33,5 +33,5 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public void SetTarget(Enemy enemy) => this.enemy = enemy;
+    public void SetTarget(Health enemy) => this.enemy = enemy;
 }

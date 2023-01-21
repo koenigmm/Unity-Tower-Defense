@@ -8,11 +8,22 @@ public class MoverForSimplePaths : MonoBehaviour
     [SerializeField] private string pathTag = "Path";
     private List<Cell> _waypoints = new();
 
-    private void Start()
+
+    private void Awake()
     {
         FindPathAndFillList();
+    }
+
+    private void OnEnable()
+    {
         if (transform.position != _waypoints[0].transform.position) TeleportToFirstWaypoint();
         StartCoroutine(Move());
+    }
+
+    private void OnDisable()
+    {
+        // _waypoints.Clear();
+        StopAllCoroutines();
     }
     IEnumerator Move()
     {
@@ -34,7 +45,7 @@ public class MoverForSimplePaths : MonoBehaviour
 
         }
         // TODO Steal lives
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private void FindPathAndFillList()

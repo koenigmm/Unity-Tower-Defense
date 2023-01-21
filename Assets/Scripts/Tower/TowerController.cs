@@ -8,11 +8,11 @@ public class TowerController : MonoBehaviour
     [SerializeField] private float timeBetweenAttacks;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float range = 30f;
-    // Testing
+    // T
     public float Range {get => range;}
-    private List<Enemy> _enemies = new();
+    private List<Health> _enemies = new();
     private SphereCollider _sphereCollider;
-    private Enemy _closestEnemy;
+    private Health _closestEnemy;
     private float _timer;
     private bool _bCanShoot = true;
 
@@ -37,29 +37,29 @@ public class TowerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Enemy enemy))
+        if (other.TryGetComponent(out Health enemy))
         {
             _enemies.Add(enemy);
-            enemy.OnDestroyed += RemoveEnemyFromList;
+            enemy.OnDie += RemoveEnemyFromList;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out Enemy enemy))
+        if (other.TryGetComponent(out Health enemy))
         {
             RemoveEnemyFromList(enemy);
         }
     }
 
-    private void RemoveEnemyFromList(Enemy enemy)
+    private void RemoveEnemyFromList(Health enemy)
     {
         if (_closestEnemy == enemy)
         {
             _closestEnemy = null;
         }
 
-        enemy.OnDestroyed -= RemoveEnemyFromList;
+        enemy.OnDie -= RemoveEnemyFromList;
         _enemies.Remove(enemy);
         FindAndSetClosestTarget();
     }
@@ -69,7 +69,7 @@ public class TowerController : MonoBehaviour
         if (_enemies.Count == 0) return;
 
         float closestDistance = Mathf.Infinity;
-        Enemy target = null;
+        Health target = null;
 
         foreach (var enemy in _enemies)
         {
