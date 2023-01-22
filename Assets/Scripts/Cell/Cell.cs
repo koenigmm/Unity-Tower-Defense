@@ -42,6 +42,10 @@ public class Cell : MonoBehaviour
         CreateRangeDisplay();
     }
 
+    private void OnEnable() => _towerInstantiationManager.OnSelectNewTowerType += SetRangeDisplayScale;
+
+    private void OnDisable() => _towerInstantiationManager.OnSelectNewTowerType -= SetRangeDisplayScale;
+
     private void OnMouseDown()
     {
         if (!b_isPlaceable || !enemyObjectPoolHandler.B_WaveCleared) return;
@@ -53,7 +57,7 @@ public class Cell : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (!b_isPlaceable  || !enemyObjectPoolHandler.B_WaveCleared) return;
+        if (!b_isPlaceable || !enemyObjectPoolHandler.B_WaveCleared) return;
         _sphere.SetActive(_bIsInBuildMode);
     }
 
@@ -75,18 +79,8 @@ public class Cell : MonoBehaviour
 
     private void CreateRangeDisplay()
     {
-        // TODO Range and damage in sperate data class or scriptable object?
-        // TODO Remove the following testing line
-
-        // diameter = 2 x radius (sphere collider from tower prefab)
-        // _currentTowerPrefabRange = towerPrefab.GetComponent<TowerController>().Range * 2f;
-        _currentTowerPrefabRange = 60f;
-
-        float sphereYScale = _currentTowerPrefabRange / 10f;
-        const float sphereYTranlateFactor = 1f;
-
+        const float sphereYTranlateFactor = 1.5f;
         _sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        _sphere.transform.localScale = new Vector3(_currentTowerPrefabRange, sphereYScale, _currentTowerPrefabRange);
         _sphere.SetActive(false);
         _sphere.transform.position = transform.position;
         _sphere.transform.Translate(Vector3.up * sphereYTranlateFactor);
@@ -95,6 +89,18 @@ public class Cell : MonoBehaviour
         renderer.material = rangeDisplayMaterial;
         renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         _sphere.transform.SetParent(transform);
+
+        SetRangeDisplayScale();
+    }
+
+    private void SetRangeDisplayScale()
+    {
+        // diameter = 2 x radius (sphere collider from tower prefab)
+        _currentTowerPrefabRange = _towerInstantiationManager.SelectedTower.Range * 2f;
+
+        const float yScaleDivisor = 5f;
+        float sphereYScale = _currentTowerPrefabRange / yScaleDivisor;
+        _sphere.transform.localScale = new Vector3(_currentTowerPrefabRange, sphereYScale, _currentTowerPrefabRange);
     }
 
     private void CreateParentGameObject()
