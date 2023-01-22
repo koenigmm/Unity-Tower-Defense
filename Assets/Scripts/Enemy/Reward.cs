@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Reward : MonoBehaviour
 {
+    [SerializeField] private int reward = 10;
     private Health _healthComponent;
     private Gold _gold;
     
@@ -13,18 +14,9 @@ public class Reward : MonoBehaviour
         _gold = GameObject.FindObjectOfType<Gold>();    
     }
 
-    private void OnEnable()
-    {
-        _healthComponent.OnDie += RewardPlayer;
-    }
+    private void OnEnable() => _healthComponent.OnDefeat += RewardPlayer;
 
-    private void OnDisable()
-    {
-        _healthComponent.OnDie -= RewardPlayer;
-    }
+    private void OnDisable() => _healthComponent.OnDefeat -= RewardPlayer;
 
-    private void RewardPlayer(Health health)
-    {
-        _gold.IncreaseAmountOfGold(10);
-    }
+    private void RewardPlayer() => _gold.IncreaseAmountOfGold(reward);
 }
