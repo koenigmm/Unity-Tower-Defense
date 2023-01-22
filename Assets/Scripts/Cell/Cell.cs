@@ -20,9 +20,10 @@ public class Cell : MonoBehaviour
     [SerializeField] Material rangeDisplayMaterial;
     public bool b_isPlaceable { get => cellType == CellType.Grass; }
     public bool b_isStart { get => cellType == CellType.Start; }
+
+    //TODO repair _towerParent
     private GameObject _towerParent;
     private GameObject _sphere;
-    private bool _bIsInBuildMode = true; //testing
     private float _currentTowerPrefabRange;
     private EnemyObjectPoolHandler enemyObjectPoolHandler;
     private TowerInstantiationManager _towerInstantiationManager;
@@ -37,10 +38,7 @@ public class Cell : MonoBehaviour
         CreateParentGameObject();
     }
 
-    private void Start()
-    {
-        CreateRangeDisplay();
-    }
+    private void Start() => CreateRangeDisplay();
 
     private void OnEnable() => _towerInstantiationManager.OnSelectNewTowerType += SetRangeDisplayScale;
 
@@ -63,13 +61,10 @@ public class Cell : MonoBehaviour
         //TODO clean up | CanBuild?
         if (!b_isPlaceable || !enemyObjectPoolHandler.B_WaveCleared) return;
         if (!_towerInstantiationManager.IsInSelectionMode) return;
-        _sphere.SetActive(_bIsInBuildMode);
+        _sphere.SetActive(_towerInstantiationManager.IsInSelectionMode);
     }
 
-    private void OnMouseExit()
-    {
-        _sphere.SetActive(false);
-    }
+    private void OnMouseExit() => _sphere.SetActive(false);
 
     public void SetCellTypeToTower()
     {
