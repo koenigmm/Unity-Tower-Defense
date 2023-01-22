@@ -87,7 +87,7 @@ public class TowerController : MonoBehaviour
     private void LookAtTarget()
     {
         HandleTimer();
-        
+
         //TODO restrict to y rotation?
         if (_closestEnemy == null) return;
         towerTop.LookAt(_closestEnemy.transform);
@@ -108,7 +108,13 @@ public class TowerController : MonoBehaviour
 
     private void FireWeapon()
     {
-        GameObject projectile = Instantiate(projectilePrefab, launchpoint.transform.position, Quaternion.identity);
+        GameObject projectile = Instantiate
+        (
+             _towerInstantiationManager.SelectedTower.Projectile,
+             launchpoint.transform.position,
+             Quaternion.identity
+        );
+
         var projectileComponent = projectile.GetComponent<Projectile>();
 
         projectileComponent.SetTarget(_closestEnemy);

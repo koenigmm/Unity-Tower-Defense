@@ -46,7 +46,7 @@ public class Cell : MonoBehaviour
     {
         if (!b_isPlaceable || !enemyObjectPoolHandler.B_WaveCleared) return;
         // Instantiate(towerPrefab, transform.position, Quaternion.identity, _towerParent.transform);
-        Instantiate(_towerInstantiationManager.SelectedTower.prefab, transform.position, Quaternion.identity);
+        Instantiate(_towerInstantiationManager.SelectedTower.Prefab, transform.position, Quaternion.identity);
         cellType = CellType.Tower;
         _sphere.SetActive(false);
     }
