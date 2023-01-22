@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO Inerhitance | Create base class for this class and MoverForFlyingEnemy
 public class MoverForSimplePaths : MonoBehaviour
 {
     [SerializeField][Range(0f, 5f)] float speed = 1.0f;
