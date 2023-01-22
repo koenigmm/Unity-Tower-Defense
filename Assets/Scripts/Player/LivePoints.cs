@@ -4,7 +4,7 @@ using UnityEngine;
 public class LivePoints : MonoBehaviour
 {
     public Action OnDie, OnDemage;
-    public int CurrentLivePoints {get => _currentLivePoints;}
+    public int CurrentLivePoints { get => _currentLivePoints; }
     [SerializeField] private int maxLivePoints = 5;
     private int _currentLivePoints;
 
@@ -15,8 +15,13 @@ public class LivePoints : MonoBehaviour
 
     public void DecreaseLivePoints()
     {
-        _currentLivePoints--;
-        if (_currentLivePoints == 0) OnDie?.Invoke();
+        _currentLivePoints = Mathf.Max(0, _currentLivePoints - 1);
+        if (_currentLivePoints == 0)
+        {
+            //TODO Enable game over screen
+            Debug.Log("Game Over");
+            OnDie?.Invoke();
+        }
         OnDemage?.Invoke();
     }
 }
