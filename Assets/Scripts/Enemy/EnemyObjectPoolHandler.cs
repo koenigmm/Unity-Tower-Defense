@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyObjectPoolHandler : MonoBehaviour
 {
-    public Action OnPhaseChange;
+    public Action OnWavePhase, OnBuildPhase;
     public int Wave { get => wave; }
     public bool B_WaveCleared { get => _bWaveCleard; }
     [SerializeField] private int defeatedEnemies;
@@ -36,18 +36,25 @@ public class EnemyObjectPoolHandler : MonoBehaviour
             return;
 
         StartCoroutine(StartWave());
-        OnPhaseChange?.Invoke();
         print("phase change");
     }
 
     void OnDisable() => RemoveAllEventListeners();
+
+    public bool TryReleaseNewWave()
+    {
+        if (!B_WaveCleared) return false;
+        _bShouldStartWave = true;
+        return true;
+    }
 
     IEnumerator StartWave()
     {
         _bWaveCleard = false;
         _bShouldStartWave = false;
         var counter = 0;
-        
+        OnWavePhase?.Invoke();
+
         while (counter < wave && wave < _amountOfEnemiesInPool)
         {
             if (_bWaveCleard)
@@ -70,7 +77,7 @@ public class EnemyObjectPoolHandler : MonoBehaviour
         if (defeatedEnemies == wave)
         {
             _bWaveCleard = true;
-            OnPhaseChange?.Invoke();
+            // OnWavePhase?.Invoke();
         }
 
         Debug.Log("handle death");
@@ -92,6 +99,6 @@ public class EnemyObjectPoolHandler : MonoBehaviour
         print("wave cleared | testing");
         defeatedEnemies = 0;
         wave++;
-        OnPhaseChange?.Invoke();
+        OnBuildPhase?.Invoke();
     }
 }

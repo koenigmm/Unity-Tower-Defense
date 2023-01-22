@@ -20,9 +20,9 @@ public class WaveDisplay : MonoBehaviour
 
     }
 
-    private void OnEnable() => enemyObjectPoolHandler.OnPhaseChange += UpdateWaveDisplay;
+    private void OnEnable() => enemyObjectPoolHandler.OnWavePhase += UpdateWaveDisplay;
 
-    private void OnDisable() => enemyObjectPoolHandler.OnPhaseChange -= UpdateWaveDisplay;
+    private void OnDisable() => enemyObjectPoolHandler.OnWavePhase -= UpdateWaveDisplay;
 
     private void UpdateWaveDisplay()
     {
