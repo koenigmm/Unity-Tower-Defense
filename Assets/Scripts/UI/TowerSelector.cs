@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// For Unity Inspector
 public class TowerSelector : MonoBehaviour
 {
     private TowerInstantiationManager _towerInstantiationManager;
