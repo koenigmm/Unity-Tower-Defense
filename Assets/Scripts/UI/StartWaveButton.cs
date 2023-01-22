@@ -26,37 +26,29 @@ public class StartWaveButton : MonoBehaviour
 
     private void OnEnable()
     {
+        //TODO One Event?
         _enemyObjectPoolHandler.OnWavePhase += HandleWavePhase;
         _enemyObjectPoolHandler.OnBuildPhase += HandleBuildPhase;
-        // HandleWavePhase();
+        HandleBuildPhase();
     }
 
     private void OnDisable()
     {
+        //TODO One Event?
         _enemyObjectPoolHandler.OnWavePhase -= HandleWavePhase;
         _enemyObjectPoolHandler.OnBuildPhase -= HandleBuildPhase;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void HandleButtonClick()
     {
-        if (_enemyObjectPoolHandler.TryReleaseNewWave())
-        {
-            print("pressed");
-            _buttonImage.color = Color.red;
-            _buttonTextElement.text = wavePhaseText;
-        }
+        if (!_enemyObjectPoolHandler.TryReleaseNewWave()) return;
+
+        _buttonImage.color = Color.red;
+        _buttonTextElement.text = wavePhaseText;
     }
 
     private void HandleWavePhase()
     {
-
-        print("Wave color");
         _buttonImage.color = wavePhaseColor;
         _buttonTextElement.text = wavePhaseText;
 
@@ -64,8 +56,6 @@ public class StartWaveButton : MonoBehaviour
 
     private void HandleBuildPhase()
     {
-
-        print("build color");
         _buttonTextElement.text = buildPhaseText;
         _buttonImage.color = buildPhaseColor;
 

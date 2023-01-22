@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyObjectPoolHandler : MonoBehaviour
 {
+    //TODO One Event?
     public Action OnWavePhase, OnBuildPhase;
     public int Wave { get => wave; }
     public bool B_WaveCleared { get => _bWaveCleard; }
@@ -75,12 +76,7 @@ public class EnemyObjectPoolHandler : MonoBehaviour
         defeatedEnemies++;
 
         if (defeatedEnemies == wave)
-        {
             _bWaveCleard = true;
-            // OnWavePhase?.Invoke();
-        }
-
-        Debug.Log("handle death");
 
         if (_bWaveCleard)
             HandleClearedWave();

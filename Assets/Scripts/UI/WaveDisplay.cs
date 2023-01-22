@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 
+//TODO clean code 
 public class WaveDisplay : MonoBehaviour
 {
     [SerializeField] private EnemyObjectPoolHandler enemyObjectPoolHandler;
@@ -20,9 +21,17 @@ public class WaveDisplay : MonoBehaviour
 
     }
 
-    private void OnEnable() => enemyObjectPoolHandler.OnWavePhase += UpdateWaveDisplay;
+    private void OnEnable()
+    {
+        enemyObjectPoolHandler.OnWavePhase += UpdateWaveDisplay;
+        enemyObjectPoolHandler.OnBuildPhase += UpdateWaveDisplay;
+    }
 
-    private void OnDisable() => enemyObjectPoolHandler.OnWavePhase -= UpdateWaveDisplay;
+    private void OnDisable()
+    {
+        enemyObjectPoolHandler.OnWavePhase -= UpdateWaveDisplay;
+        enemyObjectPoolHandler.OnBuildPhase -= UpdateWaveDisplay;
+    }
 
     private void UpdateWaveDisplay()
     {
