@@ -25,11 +25,13 @@ public class Cell : MonoBehaviour
     private bool _bIsInBuildMode = true; //testing
     private float _currentTowerPrefabRange;
     private EnemyObjectPoolHandler enemyObjectPoolHandler;
+    private TowerInstantiationManager _towerInstantiationManager;
 
     private void Awake()
     {
         _towerParent = GameObject.FindGameObjectWithTag(towerParentTag);
         enemyObjectPoolHandler = GameObject.FindObjectOfType<EnemyObjectPoolHandler>();
+        _towerInstantiationManager = GameObject.FindObjectOfType<TowerInstantiationManager>();
 
         if (_towerParent != null) return;
         CreateParentGameObject();
@@ -43,7 +45,8 @@ public class Cell : MonoBehaviour
     private void OnMouseDown()
     {
         if (!b_isPlaceable || !enemyObjectPoolHandler.B_WaveCleared) return;
-        Instantiate(towerPrefab, transform.position, Quaternion.identity, _towerParent.transform);
+        // Instantiate(towerPrefab, transform.position, Quaternion.identity, _towerParent.transform);
+        Instantiate(_towerInstantiationManager.SelectedTower.prefab, transform.position, Quaternion.identity);
         cellType = CellType.Tower;
         _sphere.SetActive(false);
     }
