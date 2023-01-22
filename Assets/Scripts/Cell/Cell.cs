@@ -48,16 +48,21 @@ public class Cell : MonoBehaviour
 
     private void OnMouseDown()
     {
+        //TODO clean up |CanBuild?
         if (!b_isPlaceable || !enemyObjectPoolHandler.B_WaveCleared) return;
-        // Instantiate(towerPrefab, transform.position, Quaternion.identity, _towerParent.transform);
+        if (!_towerInstantiationManager.IsInSelectionMode) return;
+
         Instantiate(_towerInstantiationManager.SelectedTower.Prefab, transform.position, Quaternion.identity);
+        _towerInstantiationManager.IsInSelectionMode = false;
         cellType = CellType.Tower;
         _sphere.SetActive(false);
     }
 
     private void OnMouseOver()
     {
+        //TODO clean up | CanBuild?
         if (!b_isPlaceable || !enemyObjectPoolHandler.B_WaveCleared) return;
+        if (!_towerInstantiationManager.IsInSelectionMode) return;
         _sphere.SetActive(_bIsInBuildMode);
     }
 

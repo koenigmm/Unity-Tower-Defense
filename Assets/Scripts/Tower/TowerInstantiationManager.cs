@@ -8,6 +8,7 @@ public class TowerInstantiationManager : MonoBehaviour
     public Action OnSelectNewTowerType;
     public Tower SelectedTower { get; private set; }
     [SerializeField] private List<Tower> towers = new();
+    public bool IsInSelectionMode;
 
     void Start()
     {
@@ -18,6 +19,7 @@ public class TowerInstantiationManager : MonoBehaviour
 
     public void ChangeSelectetTower(int index)
     {
+        IsInSelectionMode = true;
         SelectedTower = towers[index];
         OnSelectNewTowerType?.Invoke();
     }
