@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f47750beedd97941a3a82fa4a913883, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialAmountOfGold: 50
+  initialAmountOfGold: 120
 --- !u!114 &313977266381724764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towers:
   - <TowerClass>k__BackingField: 0
-    <Damage>k__BackingField: 50
+    <Damage>k__BackingField: 25
     <BuildCost>k__BackingField: 50
     <Range>k__BackingField: 30
     <TimeBetweenAttacks>k__BackingField: 2
@@ -92,3 +92,4 @@ MonoBehaviour:
       type: 3}
     <Projectile>k__BackingField: {fileID: 6470339120188991406, guid: 41ed4554daaa6ac42933184a32d1be51,
       type: 3}
+  IsInSelectionMode: 0

@@ -27,12 +27,14 @@ public class Cell : MonoBehaviour
     private float _currentTowerPrefabRange;
     private EnemyObjectPoolHandler enemyObjectPoolHandler;
     private TowerInstantiationManager _towerInstantiationManager;
+    private Gold _gold;
 
     private void Awake()
     {
         _towerParent = GameObject.FindGameObjectWithTag(towerParentTag);
         enemyObjectPoolHandler = GameObject.FindObjectOfType<EnemyObjectPoolHandler>();
         _towerInstantiationManager = GameObject.FindObjectOfType<TowerInstantiationManager>();
+        _gold = GameObject.FindObjectOfType<Gold>();
 
         if (_towerParent != null) return;
         CreateParentGameObject();
@@ -49,8 +51,10 @@ public class Cell : MonoBehaviour
         //TODO clean up |CanBuild?
         if (!b_isPlaceable || !enemyObjectPoolHandler.B_WaveCleared) return;
         if (!_towerInstantiationManager.IsInSelectionMode) return;
+        if (!_gold.CanBuildWithCurrentMoney(_towerInstantiationManager.SelectedTower.BuildCost)) return;
 
         Instantiate(_towerInstantiationManager.SelectedTower.Prefab, transform.position, Quaternion.identity);
+        _gold.DecreaseAmountOfGold(_towerInstantiationManager.SelectedTower.BuildCost);
         _towerInstantiationManager.IsInSelectionMode = false;
         cellType = CellType.Tower;
         _sphere.SetActive(false);
@@ -111,7 +115,3 @@ public class Cell : MonoBehaviour
         _towerParent = newParent;
     }
 }
-
-
-
-
