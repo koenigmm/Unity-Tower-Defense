@@ -10,13 +10,7 @@ public class TowerInstantiationManager : MonoBehaviour
 
     void Start()
     {
-        //TODO testing | Select tower with UI elements;
+        //TODO testing | Select tower with UI;
         SelectedTower = towers[1];
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

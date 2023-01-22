@@ -3,10 +3,15 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private float speed;
-    [SerializeField][Range(0, 200)] private int damage = 50;
+    public int Damage
+    {
+        get { return _damage; }
+        set {_damage = Mathf.Abs(value);}
+    }
     [SerializeField] private float maxFlightDuration = 4f;
     [SerializeField] private bool _bIsHoming = true;
     private Health enemy;
+    private int _damage;
 
     private void Start()
     {
@@ -25,7 +30,7 @@ public class Projectile : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Health enemyHealth))
         {
-            enemyHealth.GetDamage(damage);
+            enemyHealth.GetDamage(_damage);
         }
 
         Destroy(gameObject);

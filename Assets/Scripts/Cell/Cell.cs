@@ -77,8 +77,10 @@ public class Cell : MonoBehaviour
     {
         // TODO Range and damage in sperate data class or scriptable object?
         // TODO Remove the following testing line
+
         // diameter = 2 x radius (sphere collider from tower prefab)
-        _currentTowerPrefabRange = towerPrefab.GetComponent<TowerController>().Range * 2f;
+        // _currentTowerPrefabRange = towerPrefab.GetComponent<TowerController>().Range * 2f;
+        _currentTowerPrefabRange = 60f;
 
         float sphereYScale = _currentTowerPrefabRange / 10f;
         const float sphereYTranlateFactor = 1f;

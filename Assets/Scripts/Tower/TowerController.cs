@@ -5,12 +5,13 @@ using System.Collections.Generic;
 public class TowerController : MonoBehaviour
 {
     [SerializeField] private Transform towerTop;
-    [SerializeField] private float timeBetweenAttacks;
+    // [SerializeField] private float timeBetweenAttacks;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private GameObject launchpoint;
-    [SerializeField] private float range = 30f;
-    // T
-    public float Range {get => range;}
+    // [SerializeField] private float range = 30f;
+
+    // public float Range {get => range;}
+    public TowerInstantiationManager _towerInstantiationManager;
     private List<Health> _enemies = new();
     private SphereCollider _sphereCollider;
     private Health _closestEnemy;
@@ -19,13 +20,13 @@ public class TowerController : MonoBehaviour
 
     private void Awake()
     {
-        // enemyHealth = FindObjectOfType<Health>();
         _sphereCollider = GetComponent<SphereCollider>();
+        _towerInstantiationManager = FindObjectOfType<TowerInstantiationManager>();
     }
 
     void Start()
     {
-        _sphereCollider.radius = range;
+        _sphereCollider.radius = _towerInstantiationManager.SelectedTower.Range;
         if (_closestEnemy == null) return;
     }
 
@@ -90,6 +91,7 @@ public class TowerController : MonoBehaviour
         //TODO restrict to y rotation?
         if (_closestEnemy == null) return;
         towerTop.LookAt(_closestEnemy.transform);
+        // transform.LookAt(_closestEnemy.transform);
 
         if (_bCanShoot) FireWeapon();
     }
@@ -98,7 +100,7 @@ public class TowerController : MonoBehaviour
     {
         _timer += Time.deltaTime;
 
-        if (_timer < timeBetweenAttacks) return;
+        if (_timer < _towerInstantiationManager.SelectedTower.TimeBetweenAttacks) return;
 
         _timer = 0f;
         _bCanShoot = true;
@@ -107,7 +109,11 @@ public class TowerController : MonoBehaviour
     private void FireWeapon()
     {
         GameObject projectile = Instantiate(projectilePrefab, launchpoint.transform.position, Quaternion.identity);
-        projectile.GetComponent<Projectile>().SetTarget(_closestEnemy);
+        var projectileComponent = projectile.GetComponent<Projectile>();
+
+        projectileComponent.SetTarget(_closestEnemy);
+        projectileComponent.Damage = _towerInstantiationManager.SelectedTower.Damage;
+
         _bCanShoot = false;
     }
 

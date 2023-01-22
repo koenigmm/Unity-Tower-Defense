@@ -6,8 +6,9 @@ public class Tower
 {
     [field: SerializeField] public TowerType TowerClass { get; private set; }
     [field: SerializeField] public int Damage { get; private set; }
-    [field: SerializeField] public float Range { get; private set; }
     [field: SerializeField] public int BuildCost { get; private set; }
+    [field: SerializeField] public float Range { get; private set; }
+    [field: SerializeField] public float TimeBetweenAttacks { get; private set; }
     [field: SerializeField] public GameObject prefab { get; private set; }
 }
 

@@ -76,13 +76,15 @@ MonoBehaviour:
   towers:
   - <TowerClass>k__BackingField: 0
     <Damage>k__BackingField: 50
-    <Range>k__BackingField: 30
     <BuildCost>k__BackingField: 50
+    <Range>k__BackingField: 30
+    <TimeBetweenAttacks>k__BackingField: 2
     <prefab>k__BackingField: {fileID: 8704696727299002722, guid: 0c2adcc53c996e446b6d828beeac532d,
       type: 3}
   - <TowerClass>k__BackingField: 1
     <Damage>k__BackingField: 100
-    <Range>k__BackingField: 10
     <BuildCost>k__BackingField: 100
+    <Range>k__BackingField: 10
+    <TimeBetweenAttacks>k__BackingField: 5
     <prefab>k__BackingField: {fileID: 8704696727299002722, guid: 12c18a3afb0b22445a5e513bcb5beff2,
       type: 3}
