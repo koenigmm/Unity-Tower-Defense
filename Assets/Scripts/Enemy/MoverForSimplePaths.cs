@@ -7,10 +7,12 @@ public class MoverForSimplePaths : MonoBehaviour
     [SerializeField][Range(0f, 5f)] float speed = 1.0f;
     [SerializeField] private string pathTag = "Path";
     private List<Cell> _waypoints = new();
+    private LivePoints _livePoints;
 
 
     private void Awake()
     {
+        _livePoints = GameObject.FindObjectOfType<LivePoints>();
         FindPathAndFillList();
     }
 
@@ -20,11 +22,8 @@ public class MoverForSimplePaths : MonoBehaviour
         StartCoroutine(Move());
     }
 
-    private void OnDisable()
-    {
-        StopAllCoroutines();
-    }
-    
+    private void OnDisable() => StopAllCoroutines();
+
     IEnumerator Move()
     {
         foreach (var waypoint in _waypoints)
@@ -42,10 +41,14 @@ public class MoverForSimplePaths : MonoBehaviour
                 transform.position = Vector3.Lerp(startPosition, waypoint.transform.position, travelPercentage);
                 yield return new WaitForEndOfFrame();
             }
-
         }
-        // TODO Steal lives
+        DeactivateEnemyAndStealLive();
+    }
+
+    private void DeactivateEnemyAndStealLive()
+    {
         gameObject.SetActive(false);
+        _livePoints.DecreaseLivePoints();
     }
 
     private void FindPathAndFillList()
