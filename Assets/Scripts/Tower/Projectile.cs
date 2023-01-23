@@ -10,6 +10,7 @@ public class Projectile : MonoBehaviour
     [Header("Frost Values")]
     [SerializeField] private float slowingPercentage;
     [SerializeField] private float slowingDuration;
+    private bool _bHasHit;
     public int Damage
     {
         get { return _damage; }
@@ -35,8 +36,10 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!collision.gameObject.TryGetComponent(out Health collidedEnemy)) return;
-        if (collision.transform.CompareTag("Tower")) return;
+        if (!collision.gameObject.TryGetComponent(out Health collidedEnemy) || _bHasHit)
+            return;
+
+        _bHasHit = true;
 
         if (_bCausesDamage)
         {
@@ -47,8 +50,10 @@ public class Projectile : MonoBehaviour
             var moverComponent = collision.gameObject.GetComponent<MoverAbstract>();
             moverComponent.ReduceSpeedTemporarily(slowingPercentage, slowingDuration);
         }
-  
-        Destroy(gameObject);
+
+        const float destuctionDelay = 0.25f;
+        gameObject.SetActive(false);
+        Destroy(gameObject, destuctionDelay);
 
     }
 
