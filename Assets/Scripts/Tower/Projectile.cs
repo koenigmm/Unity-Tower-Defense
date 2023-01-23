@@ -36,6 +36,7 @@ public class Projectile : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (!collision.gameObject.TryGetComponent(out Health collidedEnemy)) return;
+        if (collision.transform.CompareTag("Tower")) return;
 
         if (_bCausesDamage)
         {
@@ -47,8 +48,7 @@ public class Projectile : MonoBehaviour
             var moverComponent = collision.gameObject.GetComponent<MoverAbstract>();
             moverComponent.ReduceSpeedTemporarily(slowingPercentage, slowingDuration);
         }
-
-        
+  
         Destroy(gameObject);
 
     }
