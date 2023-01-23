@@ -6,6 +6,7 @@ TagManager:
   tags:
   - towerparent
   - Path
+  - Tower
   layers:
   - Default
   - TransparentFX

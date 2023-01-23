@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3171720723082156687}
   m_Layer: 2
   m_Name: Lauchpoint
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 8704696726537065980}
   m_Layer: 2
   m_Name: Direction
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: -4173830765188787691}
   m_Layer: 2
   m_Name: Tower
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,10 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerTop: {fileID: 8704696727804569904}
-  projectilePrefab: {fileID: 6470339120188991406, guid: 41ed4554daaa6ac42933184a32d1be51,
-    type: 3}
   launchpoint: {fileID: 1285998644298327515}
-  _towerInstantiationManager: {fileID: 0}
 --- !u!135 &-6481585620254759246
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -225,7 +222,7 @@ GameObject:
   - component: {fileID: 8704696727804569911}
   m_Layer: 2
   m_Name: Top
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -323,7 +320,7 @@ GameObject:
   - component: {fileID: 8704696727810112268}
   m_Layer: 2
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

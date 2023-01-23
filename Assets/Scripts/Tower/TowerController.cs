@@ -119,7 +119,7 @@ public class TowerController : MonoBehaviour
     {
         _timer += Time.deltaTime;
 
-        if (_timer < _towerInstantiationManager.SelectedTower.TimeBetweenAttacks) return;
+        if (_timer < _timeBetweenAtacks) return;
 
         _timer = 0f;
         _bCanShoot = true;
@@ -137,7 +137,7 @@ public class TowerController : MonoBehaviour
         var projectileComponent = projectile.GetComponent<Projectile>();
 
         projectileComponent.SetProjectileValues(_closestEnemy, _bCanCauseDamage);
-        projectileComponent.Damage = _towerInstantiationManager.SelectedTower.Damage;
+        projectileComponent.Damage = _damage;
 
         _bCanShoot = false;
     }
