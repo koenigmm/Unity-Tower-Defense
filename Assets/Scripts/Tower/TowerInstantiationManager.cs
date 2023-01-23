@@ -26,4 +26,14 @@ public class TowerInstantiationManager : MonoBehaviour
 
         return 0;
     }
+
+    public GameObject GetProjectile(TowerType towerType)
+    {
+        foreach (var tower in towers)
+        {
+            if (tower.TowerClass == towerType) return tower.Projectile;
+        }
+
+        return null;
+    }
 }

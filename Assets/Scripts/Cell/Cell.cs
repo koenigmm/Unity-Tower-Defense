@@ -49,7 +49,8 @@ public class Cell : MonoBehaviour
         if (!_towerInstantiationManager.IsInSelectionMode) return;
         if (!_gold.CanBuildWithCurrentMoney(_towerInstantiationManager.SelectedTower.BuildCost)) return;
 
-        Instantiate(_towerInstantiationManager.SelectedTower.Prefab, transform.position, Quaternion.identity);
+        var tower = Instantiate(_towerInstantiationManager.SelectedTower.Prefab, transform.position, Quaternion.identity);
+        tower.GetComponent<TowerController>().InitializeTowerValues(_towerInstantiationManager.SelectedTower.TowerClass);
         _gold.DecreaseAmountOfGold(_towerInstantiationManager.SelectedTower.BuildCost);
         _towerInstantiationManager.IsInSelectionMode = false;
         cellType = CellType.Tower;

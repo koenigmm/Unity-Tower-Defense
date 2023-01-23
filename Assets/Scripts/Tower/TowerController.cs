@@ -12,18 +12,36 @@ public class TowerController : MonoBehaviour
     private Health _closestEnemy;
     private float _timer;
     private bool _bCanShoot = true;
-    private bool _bCanCauseDamage;
 
+    // From instantiation manager
+    private TowerType _towerType = TowerType.SmallTower;
+    private bool _bCanCauseDamage;
+    private GameObject _projectile;
+    private float _timeBetweenAtacks;
+    private int _damage;
+
+
+    // Public functions
+    public void InitializeTowerValues(TowerType towerType)
+    {
+        _towerType = towerType;
+        _projectile = _towerInstantiationManager.GetProjectile(_towerType);
+        _bCanCauseDamage = _towerInstantiationManager.SelectedTower.B_canCauseDamage;
+        _timeBetweenAtacks = _towerInstantiationManager.SelectedTower.TimeBetweenAttacks;
+        _damage = _towerInstantiationManager.SelectedTower.Damage;
+        _sphereCollider.radius = _towerInstantiationManager.SelectedTower.Range;
+    }
+
+    // Unity event functions
     private void Awake()
     {
         _sphereCollider = GetComponent<SphereCollider>();
         _towerInstantiationManager = FindObjectOfType<TowerInstantiationManager>();
     }
 
-    void Start()
+    private void Start()
     {
-        _sphereCollider.radius = _towerInstantiationManager.SelectedTower.Range;
-        if (_closestEnemy == null) return;
+        // InitializeTowerValues(_towerType);
     }
 
     private void Update()
@@ -34,7 +52,7 @@ public class TowerController : MonoBehaviour
 
     void OnEnable()
     {
-        _bCanCauseDamage = _towerInstantiationManager.SelectedTower.B_canCauseDamage;
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -111,7 +129,7 @@ public class TowerController : MonoBehaviour
     {
         GameObject projectile = Instantiate
         (
-             _towerInstantiationManager.SelectedTower.Projectile,
+             _projectile,
              launchpoint.transform.position,
              Quaternion.identity
         );

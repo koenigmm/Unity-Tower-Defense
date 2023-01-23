@@ -96,8 +96,8 @@ MonoBehaviour:
       type: 3}
   - <TowerClass>k__BackingField: 2
     <B_canCauseDamage>k__BackingField: 0
-    <Damage>k__BackingField: 5
-    <BuildCost>k__BackingField: 10
+    <Damage>k__BackingField: 0
+    <BuildCost>k__BackingField: 15
     <Range>k__BackingField: 10
     <TimeBetweenAttacks>k__BackingField: 5
     <Prefab>k__BackingField: {fileID: 7675395294422913575, guid: 746d28b2ac9d38449a91c9f07df323b4,
