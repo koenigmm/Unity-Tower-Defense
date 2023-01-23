@@ -97,8 +97,6 @@ public class Cell : MonoBehaviour
         renderer.material = rangeDisplayMaterial;
         renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         _sphere.transform.SetParent(transform);
-
-        SetRangeDisplayScale();
     }
 
     private void SetRangeDisplayScale()
