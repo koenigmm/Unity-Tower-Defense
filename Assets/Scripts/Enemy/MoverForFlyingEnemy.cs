@@ -12,6 +12,7 @@ public class MoverForFlyingEnemy : MoverAbstract
 
     private void OnEnable()
     {
+        ResetSpeed();
         GetStartAndEndPointFromPath();
         TeleportToFirstWaypoint();
     }
@@ -19,7 +20,7 @@ public class MoverForFlyingEnemy : MoverAbstract
     private void Move()
     {
         transform.LookAt(_endPosition);
-        transform.Translate(Vector3.forward * (speed * Time.deltaTime));
+        transform.Translate(Vector3.forward * (currentSpeed * Time.deltaTime));
         if (CloseToEndPoint()) DeactivateEnemyAndStealLive();
     }
 

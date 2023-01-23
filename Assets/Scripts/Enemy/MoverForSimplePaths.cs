@@ -7,6 +7,7 @@ public class MoverForSimplePaths : MoverAbstract
 
     private void OnEnable()
     {
+        ResetSpeed();
         GetStartAndEndPointFromPath();
         TeleportToFirstWaypoint();
         StartCoroutine(Move());
@@ -27,7 +28,7 @@ public class MoverForSimplePaths : MoverAbstract
 
             while (travelPercentage < 1f)
             {
-                travelPercentage += Time.deltaTime * speed;
+                travelPercentage += Time.deltaTime * currentSpeed;
                 transform.position = Vector3.Lerp(startPosition, waypoint.transform.position, travelPercentage);
                 yield return new WaitForEndOfFrame();
             }

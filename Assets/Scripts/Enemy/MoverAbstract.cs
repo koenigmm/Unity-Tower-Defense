@@ -8,6 +8,7 @@ public abstract class MoverAbstract : MonoBehaviour
     [SerializeField] protected string pathTag = "Path";
     protected List<Cell> _waypoints = new();
     protected LivePoints _livePoints;
+    protected float currentSpeed;
     protected Vector3 _startPosition, _endPosition;
     private bool _bIsSlowed;
 
@@ -36,6 +37,12 @@ public abstract class MoverAbstract : MonoBehaviour
         FindPathAndFillList();
     }
 
+    protected void ResetSpeed()
+    {
+        currentSpeed = speed;
+        _bIsSlowed = false;
+    }
+
     protected abstract void GetStartAndEndPointFromPath();
 
     public void ReduceSpeedTemporarily(float percentage, float duration)
@@ -48,10 +55,9 @@ public abstract class MoverAbstract : MonoBehaviour
     private IEnumerator ReduceSpeedTemporarilyRoutine(float percentage, float duration)
     {
         _bIsSlowed = true;
-        var normalSpeed = speed;
-        speed *= percentage / 100;
+        currentSpeed *= percentage / 100;
         yield return new WaitForSeconds(duration);
-        speed = normalSpeed;
+        currentSpeed = speed;
         _bIsSlowed = false;
     }
 }
