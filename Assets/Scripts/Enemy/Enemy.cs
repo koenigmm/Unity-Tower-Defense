@@ -1,20 +1,17 @@
-using System;
 using UnityEngine;
-
-//TODO obsolet?
-public class Enemy : MonoBehaviour
+public enum EnemyType
 {
-    public event Action<Enemy> OnDestroyed;
-    
+    BasicEnemy,
+    FlyingEnemy,
+    BigEnemy
+}
+[System.Serializable]
+public class Enemy
+{
+    [field: SerializeField] public EnemyType EnemyType { get; private set; }
+    [field: SerializeField] public int MaxHealth { get; private set; }
+    [field: SerializeField] public int Reward { get; private set; }
+    [field: SerializeField] public float Speed { get; private set; }
+    [field: SerializeField] public float Altitude { get; private set; }
 
-    private void OnDestroy()
-    {
-        OnDestroyed?.Invoke(this);
-        print("destroy");
-    }
-
-    public void DestroyTarget()
-    {
-        Destroy(this);
-    }
 }
