@@ -15,8 +15,7 @@ public class EnemyObjectPoolHandler : MonoBehaviour
     private int wave = 1;
     private List<Health> enemies = new();
     private bool _bWaveCleard = true;
-    public bool _bShouldStartWave;
-
+    private bool _bShouldStartWave;
 
     void Awake()
     {
