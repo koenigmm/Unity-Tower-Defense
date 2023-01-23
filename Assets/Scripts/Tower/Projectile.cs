@@ -44,7 +44,6 @@ public class Projectile : MonoBehaviour
         }
         else
         {
-            print("try reduce speed");
             var moverComponent = collision.gameObject.GetComponent<MoverAbstract>();
             moverComponent.ReduceSpeedTemporarily(slowingPercentage, slowingDuration);
         }

@@ -52,24 +52,20 @@ public class TowerController : MonoBehaviour
 
     void OnEnable()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Health enemy))
-        {
-            _enemiesInRange.Add(enemy);
-            enemy.OnDie += RemoveEnemyFromList;
-        }
+        if (!other.TryGetComponent(out Health enemy)) return;
+        _enemiesInRange.Add(enemy);
+        enemy.OnDie += RemoveEnemyFromList;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out Health enemy))
-        {
-            RemoveEnemyFromList(enemy);
-        }
+        if (!other.TryGetComponent(out Health enemy)) return;
+        RemoveEnemyFromList(enemy);
     }
 
     private void RemoveEnemyFromList(Health enemy)
@@ -95,11 +91,10 @@ public class TowerController : MonoBehaviour
         foreach (var enemy in _enemiesInRange)
         {
             float enemyDistance = Vector3.Distance(enemy.transform.position, transform.position);
-            if (enemyDistance < closestDistance)
-            {
-                closestDistance = enemyDistance;
-                target = enemy;
-            }
+            if (enemyDistance >= closestDistance) continue;
+            
+            closestDistance = enemyDistance;
+            target = enemy;
         }
         _closestEnemy = target;
     }

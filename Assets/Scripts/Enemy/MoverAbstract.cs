@@ -53,7 +53,6 @@ public abstract class MoverAbstract : MonoBehaviour
 
     public void ReduceSpeedTemporarily(float percentage, float duration)
     {
-        print("reduce speed");
         if (_bIsSlowed) return;
         StartCoroutine(ReduceSpeedTemporarilyRoutine(percentage, duration));
     }
