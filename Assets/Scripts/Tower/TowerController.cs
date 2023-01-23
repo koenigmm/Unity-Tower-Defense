@@ -86,7 +86,8 @@ public class TowerController : MonoBehaviour
 
     private void FindAndSetClosestTarget()
     {
-        if (_enemiesInRange.Count == 0) return;
+        //TODO should continue shooting at current enemy or should it allways set the closeset target?
+        if (_enemiesInRange.Count == 0 || _closestEnemy != null) return;
 
         float closestDistance = Mathf.Infinity;
         Health target = null;
