@@ -35,6 +35,10 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        const float destructionDeley = 0.25f;
+        gameObject.SetActive(false);
+        Destroy(gameObject, destructionDeley);
+
         if (!collision.gameObject.TryGetComponent(out Health collidedEnemy)) return;
         if (collision.transform.CompareTag("Tower")) return;
 
