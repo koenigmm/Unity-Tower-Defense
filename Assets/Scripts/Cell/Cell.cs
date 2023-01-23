@@ -15,7 +15,6 @@ public enum CellType
 public class Cell : MonoBehaviour
 {
     [SerializeField] CellType cellType;
-    [SerializeField] GameObject towerPrefab;
     [SerializeField] string towerParentTag;
     [SerializeField] Material rangeDisplayMaterial;
     public bool b_isPlaceable { get => cellType == CellType.Grass; }
@@ -31,10 +30,7 @@ public class Cell : MonoBehaviour
 
     private void Awake()
     {
-        _towerParent = GameObject.FindGameObjectWithTag(towerParentTag);
-        enemyObjectPoolHandler = GameObject.FindObjectOfType<EnemyObjectPoolHandler>();
-        _towerInstantiationManager = GameObject.FindObjectOfType<TowerInstantiationManager>();
-        _gold = GameObject.FindObjectOfType<Gold>();
+        SetReferences();
 
         if (_towerParent != null) return;
         CreateParentGameObject();
@@ -79,6 +75,14 @@ public class Cell : MonoBehaviour
         }
 
         cellType = CellType.Tower;
+    }
+
+     private void SetReferences()
+    {
+        _towerParent = GameObject.FindGameObjectWithTag(towerParentTag);
+        enemyObjectPoolHandler = GameObject.FindObjectOfType<EnemyObjectPoolHandler>();
+        _towerInstantiationManager = GameObject.FindObjectOfType<TowerInstantiationManager>();
+        _gold = GameObject.FindObjectOfType<Gold>();
     }
 
     private void CreateRangeDisplay()
