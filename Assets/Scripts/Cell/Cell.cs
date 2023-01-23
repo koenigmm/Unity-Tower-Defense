@@ -17,10 +17,10 @@ public class Cell : MonoBehaviour
     [SerializeField] CellType cellType;
     [SerializeField] string towerParentTag;
     [SerializeField] Material rangeDisplayMaterial;
+    
     public bool b_isPlaceable { get => cellType == CellType.Grass; }
     public bool b_isStart { get => cellType == CellType.Start; }
 
-    //TODO repair _towerParent
     private GameObject _towerParent;
     private GameObject _sphere;
     private float _currentTowerPrefabRange;
@@ -50,6 +50,7 @@ public class Cell : MonoBehaviour
         if (!_gold.CanBuildWithCurrentMoney(_towerInstantiationManager.SelectedTower.BuildCost)) return;
 
         var tower = Instantiate(_towerInstantiationManager.SelectedTower.Prefab, transform.position, Quaternion.identity);
+        tower.transform.parent = _towerParent.transform;
         tower.GetComponent<TowerController>().InitializeTowerValues(_towerInstantiationManager.SelectedTower.TowerClass);
         _gold.DecreaseAmountOfGold(_towerInstantiationManager.SelectedTower.BuildCost);
         _towerInstantiationManager.IsInSelectionMode = false;
