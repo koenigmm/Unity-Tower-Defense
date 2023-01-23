@@ -738,6 +738,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7514082501269844712}
     m_Modifications:
+    - target: {fileID: 2757127813137202112, guid: 1ec97f76e99450a44a3b12255e5e7206,
+        type: 3}
+      propertyPath: m_text
+      value: Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 3074217716555927836, guid: 1ec97f76e99450a44a3b12255e5e7206,
+        type: 3}
+      propertyPath: m_text
+      value: Rocket
+      objectReference: {fileID: 0}
+    - target: {fileID: 3143617761391218936, guid: 1ec97f76e99450a44a3b12255e5e7206,
+        type: 3}
+      propertyPath: m_text
+      value: Frost
+      objectReference: {fileID: 0}
     - target: {fileID: 3480012632449271919, guid: 1ec97f76e99450a44a3b12255e5e7206,
         type: 3}
       propertyPath: m_Pivot.x
