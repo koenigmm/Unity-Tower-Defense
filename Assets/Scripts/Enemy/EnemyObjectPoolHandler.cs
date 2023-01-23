@@ -65,7 +65,7 @@ public class EnemyObjectPoolHandler : MonoBehaviour
         var counter = 0;
         OnWavePhase?.Invoke();
 
-        while (counter < wave && wave < _amountOfEnemiesInPool)
+        while (counter < wave)
         {
             if (_bWaveCleard)
                 break;
@@ -76,6 +76,9 @@ public class EnemyObjectPoolHandler : MonoBehaviour
             yield return new WaitForSeconds(timeBetwwenEnemySpawn);
             counter++;
         }
+
+        if (counter == _amountOfEnemiesInPool) 
+            FillPool();
 
     }
 

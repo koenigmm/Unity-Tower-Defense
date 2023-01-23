@@ -582,7 +582,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyMoverForSimplePaths
       value: 
-      objectReference: {fileID: 1269841927}
+      objectReference: {fileID: 0}
     - target: {fileID: 6470339120188991406, guid: 41ed4554daaa6ac42933184a32d1be51,
         type: 3}
       propertyPath: m_Name
@@ -595,18 +595,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41ed4554daaa6ac42933184a32d1be51, type: 3}
---- !u!114 &1269841927 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8932361806594370678, guid: 348a1f800928a664481f24582ef412a6,
-    type: 3}
-  m_PrefabInstance: {fileID: 5090273098780503406}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4d0500d2764aff4895a02eb269549fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1495692266 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4704348485039489107, guid: 41ed4554daaa6ac42933184a32d1be51,
@@ -821,7 +809,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyMoverForSimplePaths
       value: 
-      objectReference: {fileID: 1269841927}
+      objectReference: {fileID: 0}
     - target: {fileID: 6470339120188991406, guid: 41ed4554daaa6ac42933184a32d1be51,
         type: 3}
       propertyPath: m_Name
