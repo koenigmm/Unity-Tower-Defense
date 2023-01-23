@@ -14,12 +14,12 @@ public class StartWaveButton : MonoBehaviour
     [SerializeField] private string buildPhaseText = "Release Wave";
 
     private TextMeshProUGUI _buttonTextElement;
-    private EnemyObjectPoolHandler _enemyObjectPoolHandler;
+    private EnemyWavePool _enemyObjectPoolHandler;
     private Image _buttonImage;
 
     private void Awake()
     {
-        _enemyObjectPoolHandler = FindObjectOfType<EnemyObjectPoolHandler>();
+        _enemyObjectPoolHandler = FindObjectOfType<EnemyWavePool>();
         _buttonImage = GetComponent<Image>();
         _buttonTextElement = GetComponentInChildren<TextMeshProUGUI>();
     }

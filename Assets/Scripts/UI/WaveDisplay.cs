@@ -3,14 +3,14 @@ using TMPro;
 
 public class WaveDisplay : MonoBehaviour
 {
-    [SerializeField] private EnemyObjectPoolHandler enemyObjectPoolHandler;
+    [SerializeField] private EnemyWavePool enemyObjectPoolHandler;
     [SerializeField] private TextMeshProUGUI waveDisplayCounterText;
     [SerializeField] private TextMeshProUGUI waveStatusText;
 
     private void Awake()
     {
         if (enemyObjectPoolHandler != null) return;
-        enemyObjectPoolHandler = FindObjectOfType<EnemyObjectPoolHandler>();
+        enemyObjectPoolHandler = FindObjectOfType<EnemyWavePool>();
     }
 
     private void Start() => UpdateWaveDisplay();

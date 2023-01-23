@@ -24,7 +24,7 @@ public class Cell : MonoBehaviour
     private GameObject _towerParent;
     private GameObject _sphere;
     private float _currentTowerPrefabRange;
-    private EnemyObjectPoolHandler enemyObjectPoolHandler;
+    private EnemyWavePool enemyObjectPoolHandler;
     private TowerInstantiationManager _towerInstantiationManager;
     private Gold _gold;
 
@@ -82,7 +82,7 @@ public class Cell : MonoBehaviour
      private void SetReferences()
     {
         _towerParent = GameObject.FindGameObjectWithTag(towerParentTag);
-        enemyObjectPoolHandler = GameObject.FindObjectOfType<EnemyObjectPoolHandler>();
+        enemyObjectPoolHandler = GameObject.FindObjectOfType<EnemyWavePool>();
         _towerInstantiationManager = GameObject.FindObjectOfType<TowerInstantiationManager>();
         _gold = GameObject.FindObjectOfType<Gold>();
     }

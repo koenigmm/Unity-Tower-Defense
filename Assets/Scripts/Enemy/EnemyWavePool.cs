@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyObjectPoolHandler : MonoBehaviour
+public class EnemyWavePool : MonoBehaviour
 {
     public Action OnWavePhase, OnBuildPhase;
     public int Wave { get => wave; }
