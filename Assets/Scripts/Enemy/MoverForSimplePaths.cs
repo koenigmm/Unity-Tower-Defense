@@ -2,24 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO Inerhitance | Create base class for this class and MoverForFlyingEnemy
-public class MoverForSimplePaths : MonoBehaviour
+public class MoverForSimplePaths : MoverAbstract
 {
-    [SerializeField][Range(0f, 5f)] float speed = 1.0f;
-    [SerializeField] private string pathTag = "Path";
-    private List<Cell> _waypoints = new();
-    private LivePoints _livePoints;
-
-
-    private void Awake()
-    {
-        _livePoints = GameObject.FindObjectOfType<LivePoints>();
-        FindPathAndFillList();
-    }
+    private void Awake() => SetReferences();
 
     private void OnEnable()
     {
-        if (transform.position != _waypoints[0].transform.position) TeleportToFirstWaypoint();
+        GetStartAndEndPointFromPath();
+        TeleportToFirstWaypoint();
         StartCoroutine(Move());
     }
 
@@ -44,24 +34,10 @@ public class MoverForSimplePaths : MonoBehaviour
             }
         }
         DeactivateEnemyAndStealLive();
-    }
-
-    private void DeactivateEnemyAndStealLive()
+    } 
+    override protected void GetStartAndEndPointFromPath()
     {
-        gameObject.SetActive(false);
-        _livePoints.DecreaseLivePoints();
-    }
-
-    private void FindPathAndFillList()
-    {
-        var path = GameObject.FindGameObjectWithTag(pathTag);
-        var cells = path.GetComponentsInChildren<Cell>();
-
-        foreach (var cell in cells)
-        {
-            _waypoints.Add(cell);
-        }
-    }
-
-    private void TeleportToFirstWaypoint() => transform.position = _waypoints[0].transform.position;
+        _startPosition = _waypoints[0].transform.position;
+        _endPosition = _waypoints[_waypoints.Count - 1].transform.position;
+    }  
 }
