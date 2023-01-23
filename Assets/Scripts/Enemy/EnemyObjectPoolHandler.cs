@@ -11,6 +11,7 @@ public class EnemyObjectPoolHandler : MonoBehaviour
     public bool B_WaveCleared { get => _bWaveCleard; }
     [SerializeField] private int defeatedEnemies;
     [SerializeField] private float timeBetwwenEnemySpawn = 2f;
+    [SerializeField] private List<Enemy> enemyTypeList = new();
     private int _amountOfEnemiesInPool;
     private int wave = 1;
     private List<Health> enemies = new();
@@ -20,14 +21,22 @@ public class EnemyObjectPoolHandler : MonoBehaviour
 
     void Awake()
     {
-        var enemiesInChildren = GetComponentsInChildren<Health>();
+        FillPool();
+    }
 
-        foreach (var enemy in enemiesInChildren)
+    private void FillPool()
+    {
+        foreach (var enemy in enemyTypeList)
         {
-            enemies.Add(enemy);
-            enemy.gameObject.SetActive(false);
+            for (int i = 0; i < enemy.InitialAmountInObjectPool; i++)
+            {
+                var currentEnemyGameObject = Instantiate(enemy.Prefab);
+                currentEnemyGameObject.SetActive(false);
+                currentEnemyGameObject.transform.parent = transform;
+                var currentEnemyHealthComponent = currentEnemyGameObject.GetComponent<Health>();
+                enemies.Add(currentEnemyHealthComponent);
+            }
         }
-
         _amountOfEnemiesInPool = enemies.Count;
     }
 

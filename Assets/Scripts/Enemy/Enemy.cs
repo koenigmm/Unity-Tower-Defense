@@ -13,5 +13,7 @@ public class Enemy
     [field: SerializeField] public int Reward { get; private set; }
     [field: SerializeField] public float Speed { get; private set; }
     [field: SerializeField] public float Altitude { get; private set; }
+    [field: SerializeField] public float InitialAmountInObjectPool { get; private set; } = 5;
+    [field: SerializeField] public GameObject Prefab { get; private set; }
 
 }
