@@ -11,8 +11,7 @@ PrefabInstance:
         type: 3}
       propertyPath: launchpoint
       value: 
-      objectReference: {fileID: 1874346347540289967, guid: 375be79d53413324bbacd76b56625f38,
-        type: 3}
+      objectReference: {fileID: 257259484855461534}
     - target: {fileID: 8704696727299002721, guid: 0c2adcc53c996e446b6d828beeac532d,
         type: 3}
       propertyPath: m_RootOrder
@@ -80,3 +79,9 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 78215402127f09b46acc711a79059bf5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c2adcc53c996e446b6d828beeac532d, type: 3}
+--- !u!1 &257259484855461534 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1285998644298327515, guid: 0c2adcc53c996e446b6d828beeac532d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1317638067684754245}
+  m_PrefabAsset: {fileID: 0}

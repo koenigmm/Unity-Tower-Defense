@@ -5,14 +5,9 @@ using System.Collections.Generic;
 public class TowerController : MonoBehaviour
 {
     [SerializeField] private Transform towerTop;
-    // [SerializeField] private float timeBetweenAttacks;
-    [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private GameObject launchpoint;
-    // [SerializeField] private float range = 30f;
-
-    // public float Range {get => range;}
     private TowerInstantiationManager _towerInstantiationManager;
-    private List<Health> _enemies = new();
+    private List<Health> _enemiesInRange = new();
     private SphereCollider _sphereCollider;
     private Health _closestEnemy;
     private float _timer;
@@ -40,7 +35,7 @@ public class TowerController : MonoBehaviour
     {
         if (other.TryGetComponent(out Health enemy))
         {
-            _enemies.Add(enemy);
+            _enemiesInRange.Add(enemy);
             enemy.OnDie += RemoveEnemyFromList;
         }
     }
@@ -61,18 +56,18 @@ public class TowerController : MonoBehaviour
         }
 
         enemy.OnDie -= RemoveEnemyFromList;
-        _enemies.Remove(enemy);
+        _enemiesInRange.Remove(enemy);
         FindAndSetClosestTarget();
     }
 
     private void FindAndSetClosestTarget()
     {
-        if (_enemies.Count == 0) return;
+        if (_enemiesInRange.Count == 0) return;
 
         float closestDistance = Mathf.Infinity;
         Health target = null;
 
-        foreach (var enemy in _enemies)
+        foreach (var enemy in _enemiesInRange)
         {
             float enemyDistance = Vector3.Distance(enemy.transform.position, transform.position);
             if (enemyDistance < closestDistance)
