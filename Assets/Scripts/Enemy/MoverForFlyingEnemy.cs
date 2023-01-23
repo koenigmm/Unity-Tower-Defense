@@ -5,8 +5,8 @@ using UnityEngine;
 // TODO Inerhitance | Create base class for this class and MoverForSimplePaths
 public class MoverForFlyingEnemy : MoverAbstract
 {
-    [SerializeField] float altitude = 10f;
-    [SerializeField] float endPointDetectionTolerance = 0.5f;
+    [SerializeField] private float altitude = 10f;
+    [SerializeField] private float endPointDetectionTolerance = 0.5f;
 
 
     private void Awake() => SetReferences();
