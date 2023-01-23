@@ -1,7 +1,15 @@
 using UnityEngine;
 
+enum ProjectileType
+{
+    Projectile,
+    Rocket,
+    FrostProjectile
+}
+
 public class Projectile : MonoBehaviour
 {
+    [SerializeField] private ProjectileType projectileType;
     [SerializeField] private float speed;
     public int Damage
     {
