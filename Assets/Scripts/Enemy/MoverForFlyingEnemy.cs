@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-// TODO Inerhitance | Create base class for this class and MoverForSimplePaths
 public class MoverForFlyingEnemy : MoverAbstract
 {
     [SerializeField] private float altitude = 10f;
@@ -38,8 +35,6 @@ public class MoverForFlyingEnemy : MoverAbstract
         // _endPosition.y = 1f;
     }
 
-    private bool CloseToEndPoint()
-    {
-        return Vector3.Distance(transform.position, _endPosition) <= endPointDetectionTolerance;
-    }
+    private bool CloseToEndPoint() =>
+         Vector3.Distance(transform.position, _endPosition) <= endPointDetectionTolerance;
 }
