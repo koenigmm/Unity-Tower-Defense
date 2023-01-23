@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class LivePoints : MonoBehaviour
 {
-    //TODO OnDie obsolet?
     public Action OnDie, OnDemage;
     public int CurrentLivePoints { get => _currentLivePoints; }
     [SerializeField] private int maxLivePoints = 5;

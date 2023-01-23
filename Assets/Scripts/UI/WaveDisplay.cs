@@ -1,7 +1,6 @@
 using UnityEngine;
 using TMPro;
 
-//TODO clean code 
 public class WaveDisplay : MonoBehaviour
 {
     [SerializeField] private EnemyObjectPoolHandler enemyObjectPoolHandler;
