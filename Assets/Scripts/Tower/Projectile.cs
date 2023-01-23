@@ -1,29 +1,24 @@
 using UnityEngine;
 
-enum ProjectileType
-{
-    Projectile,
-    Rocket,
-    FrostProjectile
-}
-
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private ProjectileType projectileType;
+    [Header("Flying Behavior")]
     [SerializeField] private float speed;
+    [SerializeField] private float maxFlightDuration = 4f;
+    [SerializeField] private bool _bIsHoming = true;
+
+    [Header("Frost Values")]
+    [SerializeField] private float slowingPercentage;
+    [SerializeField] private float slowingDuration;
     public int Damage
     {
         get { return _damage; }
         set { _damage = Mathf.Abs(value); }
     }
-    [SerializeField] private float maxFlightDuration = 4f;
-    [SerializeField] private bool _bIsHoming = true;
-    private Health enemy;
+
+    private Health enemyHealth;
     private int _damage;
     private bool _bCausesDamage;
-
-    private void Awake() =>
-         _bCausesDamage = projectileType != ProjectileType.FrostProjectile;
 
     private void Start()
     {
@@ -34,20 +29,33 @@ public class Projectile : MonoBehaviour
     {
         transform.Translate(Vector3.forward * (speed * Time.deltaTime));
         if (!_bIsHoming) return;
-        if (enemy == null) return;
-        transform.LookAt(enemy.transform.position);
+        if (enemyHealth == null) return;
+        transform.LookAt(enemyHealth.transform.position);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent(out Health enemyHealth))
+        if (!collision.gameObject.TryGetComponent(out Health collidedEnemy)) return;
+
+        if (_bCausesDamage)
         {
-            // if (_bCausesDamage) enemyHealth.GetDamage(_damage);
-            collision.gameObject.GetComponent<MoverAbstract>().ReduceSpeedTemporarily(50f, 5);
+            collidedEnemy.GetDamage(_damage);
+        }
+        else
+        {
+            print("try reduce speed");
+            var moverComponent = collision.gameObject.GetComponent<MoverAbstract>();
+            moverComponent.ReduceSpeedTemporarily(slowingPercentage, slowingDuration);
         }
 
+        
         Destroy(gameObject);
+
     }
 
-    public void SetTarget(Health enemy) => this.enemy = enemy;
+    public void SetProjectileValues(Health enemy, bool canCauseDamage = true)
+    {
+        this.enemyHealth = enemy;
+        _bCausesDamage = canCauseDamage;
+    }
 }

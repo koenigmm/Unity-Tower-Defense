@@ -115,6 +115,8 @@ MonoBehaviour:
   speed: 50
   maxFlightDuration: 5
   _bIsHoming: 1
+  slowingPercentage: 50
+  slowingDuration: 3.5
 --- !u!54 &144347110006321982
 Rigidbody:
   m_ObjectHideFlags: 0

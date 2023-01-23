@@ -12,6 +12,7 @@ public class TowerController : MonoBehaviour
     private Health _closestEnemy;
     private float _timer;
     private bool _bCanShoot = true;
+    private bool _bCanCauseDamage;
 
     private void Awake()
     {
@@ -29,6 +30,11 @@ public class TowerController : MonoBehaviour
     {
         LookAtTarget();
         FindAndSetClosestTarget();
+    }
+
+    void OnEnable()
+    {
+        _bCanCauseDamage = _towerInstantiationManager.SelectedTower.B_canCauseDamage;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -112,7 +118,7 @@ public class TowerController : MonoBehaviour
 
         var projectileComponent = projectile.GetComponent<Projectile>();
 
-        projectileComponent.SetTarget(_closestEnemy);
+        projectileComponent.SetProjectileValues(_closestEnemy, _bCanCauseDamage);
         projectileComponent.Damage = _towerInstantiationManager.SelectedTower.Damage;
 
         _bCanShoot = false;

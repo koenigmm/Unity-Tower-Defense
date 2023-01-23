@@ -5,6 +5,7 @@ using Unity.Collections;
 public class Tower
 {
     [field: SerializeField] public TowerType TowerClass { get; private set; }
+    [field: SerializeField] public bool B_canCauseDamage { get; private set; } = true;
     [field: SerializeField] public int Damage { get; private set; }
     [field: SerializeField] public int BuildCost { get; private set; }
     [field: SerializeField] public float Range { get; private set; }

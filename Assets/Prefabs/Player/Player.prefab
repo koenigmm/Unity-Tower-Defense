@@ -75,30 +75,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towers:
   - <TowerClass>k__BackingField: 0
+    <B_canCauseDamage>k__BackingField: 1
     <Damage>k__BackingField: 25
     <BuildCost>k__BackingField: 50
     <Range>k__BackingField: 30
     <TimeBetweenAttacks>k__BackingField: 2
     <Prefab>k__BackingField: {fileID: 8704696727299002722, guid: 0c2adcc53c996e446b6d828beeac532d,
       type: 3}
-    <Projectile>k__BackingField: {fileID: 6470339120188991406, guid: 41ed4554daaa6ac42933184a32d1be51,
+    <Projectile>k__BackingField: {fileID: 8667883569548471551, guid: 1434b5b17361d7f488af4b4e2c577cc8,
       type: 3}
   - <TowerClass>k__BackingField: 1
+    <B_canCauseDamage>k__BackingField: 1
     <Damage>k__BackingField: 100
     <BuildCost>k__BackingField: 100
     <Range>k__BackingField: 10
     <TimeBetweenAttacks>k__BackingField: 5
     <Prefab>k__BackingField: {fileID: 8704696727299002722, guid: 12c18a3afb0b22445a5e513bcb5beff2,
       type: 3}
-    <Projectile>k__BackingField: {fileID: 6470339120188991406, guid: 41ed4554daaa6ac42933184a32d1be51,
+    <Projectile>k__BackingField: {fileID: 8667883569548471551, guid: 1434b5b17361d7f488af4b4e2c577cc8,
       type: 3}
   - <TowerClass>k__BackingField: 2
+    <B_canCauseDamage>k__BackingField: 0
     <Damage>k__BackingField: 5
-    <BuildCost>k__BackingField: 100
+    <BuildCost>k__BackingField: 10
     <Range>k__BackingField: 10
     <TimeBetweenAttacks>k__BackingField: 5
     <Prefab>k__BackingField: {fileID: 7675395294422913575, guid: 746d28b2ac9d38449a91c9f07df323b4,
       type: 3}
-    <Projectile>k__BackingField: {fileID: 6470339120188991406, guid: 41ed4554daaa6ac42933184a32d1be51,
+    <Projectile>k__BackingField: {fileID: 1874346347540289967, guid: 375be79d53413324bbacd76b56625f38,
       type: 3}
   IsInSelectionMode: 0
