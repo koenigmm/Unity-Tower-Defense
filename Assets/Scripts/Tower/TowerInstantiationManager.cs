@@ -16,4 +16,14 @@ public class TowerInstantiationManager : MonoBehaviour
         SelectedTower = towers[index];
         OnSelectNewTowerType?.Invoke();
     }
+
+    public int GetBuildCost(TowerType towerType)
+    {
+        foreach (var tower in towers)
+        {
+            if (tower.TowerClass == towerType) return tower.BuildCost;
+        }
+
+        return 0;
+    }
 }
