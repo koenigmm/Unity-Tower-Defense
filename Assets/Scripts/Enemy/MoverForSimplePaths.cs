@@ -7,9 +7,7 @@ public class MoverForSimplePaths : MoverAbstract
 
     private void OnEnable()
     {
-        ResetSpeed();
-        GetStartAndEndPointFromPath();
-        TeleportToFirstWaypoint();
+        HandleEnable();
         StartCoroutine(Move());
     }
 

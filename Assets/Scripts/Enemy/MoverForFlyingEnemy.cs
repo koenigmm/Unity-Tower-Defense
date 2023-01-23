@@ -10,12 +10,7 @@ public class MoverForFlyingEnemy : MoverAbstract
 
     private void Update() => Move();
 
-    private void OnEnable()
-    {
-        ResetSpeed();
-        GetStartAndEndPointFromPath();
-        TeleportToFirstWaypoint();
-    }
+    private void OnEnable() => HandleEnable();
 
     private void Move()
     {
@@ -26,7 +21,6 @@ public class MoverForFlyingEnemy : MoverAbstract
 
     override protected void GetStartAndEndPointFromPath()
     {
-
         _startPosition = _waypoints[0].transform.position;
         _endPosition = _waypoints[_waypoints.Count - 1].transform.position;
         _startPosition.y = altitude;

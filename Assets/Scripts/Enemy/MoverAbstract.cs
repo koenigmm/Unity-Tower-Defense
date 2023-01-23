@@ -42,6 +42,12 @@ public abstract class MoverAbstract : MonoBehaviour
         currentSpeed = speed;
         _bIsSlowed = false;
     }
+    protected void HandleEnable()
+    {
+        ResetSpeed();
+        GetStartAndEndPointFromPath();
+        TeleportToFirstWaypoint();
+    }
 
     protected abstract void GetStartAndEndPointFromPath();
 
