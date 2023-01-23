@@ -11,7 +11,7 @@ public class TowerController : MonoBehaviour
     // [SerializeField] private float range = 30f;
 
     // public float Range {get => range;}
-    public TowerInstantiationManager _towerInstantiationManager;
+    private TowerInstantiationManager _towerInstantiationManager;
     private List<Health> _enemies = new();
     private SphereCollider _sphereCollider;
     private Health _closestEnemy;
