@@ -7,6 +7,7 @@ public class BuildingCostDisplay : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _textElement;
     [SerializeField] private TowerType towerType;
+    [SerializeField] private string baseMessage = "Gold: ";
     private TowerInstantiationManager _towerInstantiationManager;
 
     private void Awake()
@@ -18,6 +19,6 @@ public class BuildingCostDisplay : MonoBehaviour
 
     private void Start()
     {
-        _textElement.text = _towerInstantiationManager.GetBuildCost(towerType).ToString();
+        _textElement.text = $"{baseMessage} {_towerInstantiationManager.GetBuildCost(towerType).ToString()}";
     }
 }
