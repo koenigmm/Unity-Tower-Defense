@@ -178,11 +178,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerTop: {fileID: 8704696727804569904}
-  timeBetweenAttacks: 2
   projectilePrefab: {fileID: 6470339120188991406, guid: 41ed4554daaa6ac42933184a32d1be51,
     type: 3}
   launchpoint: {fileID: 1285998644298327515}
-  range: 30
+  _towerInstantiationManager: {fileID: 0}
 --- !u!135 &-6481585620254759246
 SphereCollider:
   m_ObjectHideFlags: 0

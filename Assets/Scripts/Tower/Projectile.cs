@@ -14,12 +14,16 @@ public class Projectile : MonoBehaviour
     public int Damage
     {
         get { return _damage; }
-        set {_damage = Mathf.Abs(value);}
+        set { _damage = Mathf.Abs(value); }
     }
     [SerializeField] private float maxFlightDuration = 4f;
     [SerializeField] private bool _bIsHoming = true;
     private Health enemy;
     private int _damage;
+    private bool _bCausesDamage;
+
+    private void Awake() =>
+         _bCausesDamage = projectileType != ProjectileType.FrostProjectile;
 
     private void Start()
     {
@@ -38,7 +42,8 @@ public class Projectile : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Health enemyHealth))
         {
-            enemyHealth.GetDamage(_damage);
+            // if (_bCausesDamage) enemyHealth.GetDamage(_damage);
+            collision.gameObject.GetComponent<MoverAbstract>().ReduceSpeedTemporarily(50f, 5);
         }
 
         Destroy(gameObject);

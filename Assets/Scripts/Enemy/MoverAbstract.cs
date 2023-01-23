@@ -9,6 +9,7 @@ public abstract class MoverAbstract : MonoBehaviour
     protected List<Cell> _waypoints = new();
     protected LivePoints _livePoints;
     protected Vector3 _startPosition, _endPosition;
+    private bool _bIsSlowed;
 
     protected void DeactivateEnemyAndStealLive()
     {
@@ -36,4 +37,21 @@ public abstract class MoverAbstract : MonoBehaviour
     }
 
     protected abstract void GetStartAndEndPointFromPath();
+
+    public void ReduceSpeedTemporarily(float percentage, float duration)
+    {
+        print("reduce speed");
+        if (_bIsSlowed) return;
+        StartCoroutine(ReduceSpeedTemporarilyRoutine(percentage, duration));
+    }
+
+    private IEnumerator ReduceSpeedTemporarilyRoutine(float percentage, float duration)
+    {
+        _bIsSlowed = true;
+        var normalSpeed = speed;
+        speed *= percentage / 100;
+        yield return new WaitForSeconds(duration);
+        speed = normalSpeed;
+        _bIsSlowed = false;
+    }
 }
