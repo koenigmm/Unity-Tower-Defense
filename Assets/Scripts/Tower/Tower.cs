@@ -12,6 +12,7 @@ public class Tower
     [field: SerializeField] public float TimeBetweenAttacks { get; private set; }
     [field: SerializeField] public GameObject Prefab { get; private set; }
     [field: SerializeField] public GameObject Projectile { get; private set; }
+    [field: SerializeField] public Vector2Int RequiredCellsForBuilding = new Vector2Int(1, 1);
 }
 
 [System.Serializable]
