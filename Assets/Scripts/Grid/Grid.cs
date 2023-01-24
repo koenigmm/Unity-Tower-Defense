@@ -22,7 +22,7 @@ public class Grid : MonoBehaviour
     private void Awake()
     {
         // _gridSnappingValue = Mathf.RoundToInt(UnityEditor.EditorSnapSettings.move.x);
-        // if (_gridSnappingValue % 2 != 0) throw new System.Exception("Grid snapping value should be an even number");
+        if (_gridSnappingValue % 2 != 0) throw new System.Exception("Grid snapping value should be an even number");
         FillGridDictionaryWithInitlalValues();
     }
 
