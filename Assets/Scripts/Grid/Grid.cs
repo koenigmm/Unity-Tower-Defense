@@ -15,9 +15,7 @@ public class Grid : MonoBehaviour
     }
 
     public void ChangeCellType(Vector2Int coordinates, CellType cellType) => _grid[coordinates] = cellType;
-
-    public CellType GetCellTypeForGivenCoordinates(Vector2Int coordinates) => _grid[coordinates];
-
+    public bool CanBuildOnCell(Vector2Int coordinates) => GetCellTypeForGivenCoordinates(coordinates) == CellType.Grass;
 
     private void Awake()
     {
@@ -51,4 +49,6 @@ public class Grid : MonoBehaviour
             Debug.Log(cell.Key + " " + cell.Value);
         }
     }
+
+    private CellType GetCellTypeForGivenCoordinates(Vector2Int coordinates) => _grid[coordinates];
 }

@@ -28,13 +28,14 @@ public class Cell : MonoBehaviour
     private TowerInstantiationManager _towerInstantiationManager;
     private Gold _gold;
     private Grid _grid;
+    private Vector2Int _coordinatesFromGrid = Vector2Int.zero;
 
     private void Awake()
     {
         SetReferences();
-        var currentCoordinates = _grid.GetCoordinatesFromPosition(transform.position);
-        _grid.ChangeCellType(currentCoordinates, cellType);
-        _bIsPlaceable = _grid.GetCellTypeForGivenCoordinates(currentCoordinates) == CellType.Grass;
+        _coordinatesFromGrid= _grid.GetCoordinatesFromPosition(transform.position);
+        _grid.ChangeCellType(_coordinatesFromGrid, cellType);
+        _bIsPlaceable = _grid.CanBuildOnCell(_coordinatesFromGrid);
 
         if (_towerParent != null) return;
         CreateParentGameObject();
@@ -83,8 +84,7 @@ public class Cell : MonoBehaviour
         // cellType = CellType.Tower;
 
         // TODO Testing
-        var coordinates = _grid.GetCoordinatesFromPosition(transform.position);
-        _grid.ChangeCellType(coordinates, CellType.Tower);
+        _grid.ChangeCellType(_coordinatesFromGrid, CellType.Tower);
         _bIsPlaceable = false;
     }
 
