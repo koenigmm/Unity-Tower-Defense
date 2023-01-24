@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fefa05cb94f6ee145adcad2188257157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridDimensions: {x: 0, y: 0}
+  gridDimensions: {x: 9, y: 9}
 --- !u!1 &462888826294836319
 GameObject:
   m_ObjectHideFlags: 0
