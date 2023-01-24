@@ -17,9 +17,9 @@ public class Cell : MonoBehaviour
     [SerializeField] CellType cellType;
     [SerializeField] string towerParentTag;
     [SerializeField] Material rangeDisplayMaterial;
-    
-    public bool b_isPlaceable { get => cellType == CellType.Grass; }
-    public bool b_isStart { get => cellType == CellType.Start; }
+
+    private bool _bIsPlaceable = true;
+    public bool _bIsStart { get => cellType == CellType.Start; }
 
     private GameObject _towerParent;
     private GameObject _sphere;
@@ -32,9 +32,9 @@ public class Cell : MonoBehaviour
     private void Awake()
     {
         SetReferences();
-
         var currentCoordinates = Grid.GetCoordinatesFromPosition(transform.position);
-        _grid.ChangeCellType(currentCoordinates ,cellType);
+        _grid.ChangeCellType(currentCoordinates, cellType);
+        _bIsPlaceable = _grid.GetCellTypeForGivenCoordinates(currentCoordinates) == CellType.Grass;
 
         if (_towerParent != null) return;
         CreateParentGameObject();
@@ -49,7 +49,7 @@ public class Cell : MonoBehaviour
     private void OnMouseDown()
     {
         //TODO clean up |CanBuild?
-        if (!b_isPlaceable || !enemyObjectPoolHandler.B_WaveCleared) return;
+        if (!_bIsPlaceable || !enemyObjectPoolHandler.B_WaveCleared) return;
         if (!_towerInstantiationManager.IsInSelectionMode) return;
         if (!_gold.CanBuildWithCurrentMoney(_towerInstantiationManager.SelectedTower.BuildCost)) return;
 
@@ -65,30 +65,30 @@ public class Cell : MonoBehaviour
     private void OnMouseOver()
     {
         //TODO clean up | CanBuild?
-        if (!b_isPlaceable || !enemyObjectPoolHandler.B_WaveCleared) return;
+        if (!_bIsPlaceable || !enemyObjectPoolHandler.B_WaveCleared) return;
         if (!_towerInstantiationManager.IsInSelectionMode) return;
         _sphere.SetActive(_towerInstantiationManager.IsInSelectionMode);
     }
 
     private void OnMouseExit() => _sphere.SetActive(false);
 
-    public void SetCellTypeToTower()
+    private void SetCellTypeToTower()
     {
-        if (cellType != CellType.Grass)
-        {
-            Debug.LogWarning("Only grass cells can be changed");
-            return;
-        }
+        // if (cellType != CellType.Grass)
+        // {
+        //     Debug.LogWarning("Only grass cells can be changed");
+        //     return;
+        // }
 
-        cellType = CellType.Tower;
+        // cellType = CellType.Tower;
 
-        //Testing
-        
+        // TODO Testing
         var coordinates = Grid.GetCoordinatesFromPosition(transform.position);
-        _grid.ChangeCellType(coordinates,CellType.Tower);
+        _grid.ChangeCellType(coordinates, CellType.Tower);
+        _bIsPlaceable = false;
     }
 
-     private void SetReferences()
+    private void SetReferences()
     {
         _towerParent = GameObject.FindGameObjectWithTag(towerParentTag);
         enemyObjectPoolHandler = GameObject.FindObjectOfType<EnemyWavePool>();

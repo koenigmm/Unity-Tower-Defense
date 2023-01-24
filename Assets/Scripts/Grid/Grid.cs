@@ -30,11 +30,11 @@ public class Grid : MonoBehaviour
     private void Start()
     {
         DebugPrintDictionary();
-        print (_gridSnappingValue);
     }
 
     private void FillGridDictionaryWithInitlalValues()
     {
+        _grid.Clear();
         for (int i = 0; i < gridDimensions.x; i++)
         {
             for (int j = 0; j < gridDimensions.y; j++)
@@ -46,7 +46,6 @@ public class Grid : MonoBehaviour
 
     private void DebugPrintDictionary()
     {
-
         foreach (var cell in _grid)
         {
             Debug.Log(cell.Key + " " + cell.Value);

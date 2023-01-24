@@ -17,7 +17,7 @@ public class MoverForSimplePaths : MoverAbstract
     {
         foreach (var waypoint in _waypoints)
         {
-            if (waypoint.b_isStart) continue;
+            if (waypoint._bIsStart) continue;
 
             Vector3 startPosition = transform.position;
             float travelPercentage = 0f;
