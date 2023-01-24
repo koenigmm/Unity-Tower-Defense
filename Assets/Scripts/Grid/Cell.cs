@@ -27,10 +27,14 @@ public class Cell : MonoBehaviour
     private EnemyWavePool enemyObjectPoolHandler;
     private TowerInstantiationManager _towerInstantiationManager;
     private Gold _gold;
+    private Grid _grid;
 
     private void Awake()
     {
         SetReferences();
+
+        var currentCoordinates = Grid.GetCoordinatesFromPosition(transform.position);
+        _grid.ChangeCellType(currentCoordinates ,cellType);
 
         if (_towerParent != null) return;
         CreateParentGameObject();
@@ -54,7 +58,7 @@ public class Cell : MonoBehaviour
         tower.GetComponent<TowerController>().InitializeTowerValues(_towerInstantiationManager.SelectedTower.TowerClass);
         _gold.DecreaseAmountOfGold(_towerInstantiationManager.SelectedTower.BuildCost);
         _towerInstantiationManager.IsInSelectionMode = false;
-        cellType = CellType.Tower;
+        SetCellTypeToTower();
         _sphere.SetActive(false);
     }
 
@@ -77,6 +81,11 @@ public class Cell : MonoBehaviour
         }
 
         cellType = CellType.Tower;
+
+        //Testing
+        
+        var coordinates = Grid.GetCoordinatesFromPosition(transform.position);
+        _grid.ChangeCellType(coordinates,CellType.Tower);
     }
 
      private void SetReferences()
@@ -85,6 +94,7 @@ public class Cell : MonoBehaviour
         enemyObjectPoolHandler = GameObject.FindObjectOfType<EnemyWavePool>();
         _towerInstantiationManager = GameObject.FindObjectOfType<TowerInstantiationManager>();
         _gold = GameObject.FindObjectOfType<Gold>();
+        _grid = GameObject.FindObjectOfType<Grid>();
     }
 
     private void CreateRangeDisplay()

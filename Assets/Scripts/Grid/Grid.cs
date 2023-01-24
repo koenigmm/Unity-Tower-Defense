@@ -5,15 +5,32 @@ using UnityEngine;
 public class Grid : MonoBehaviour
 {
     [SerializeField] private Vector2Int gridDimensions;
-    private int _gridSnappingValue;
+    private static int _gridSnappingValue;
     private Dictionary<Vector2Int, CellType> _grid = new();
+
+    public static Vector2Int GetCoordinatesFromPosition(Vector3 position)
+    {
+        Vector2Int coordinates = new Vector2Int(Mathf.RoundToInt(position.x / _gridSnappingValue), Mathf.RoundToInt(position.z / _gridSnappingValue));
+        return coordinates;
+    }
+
+    public void ChangeCellType(Vector2Int coordinates, CellType cellType) => _grid[coordinates] = cellType;
+
+    public CellType GetCellTypeForGivenCoordinates(Vector2Int coordinates) => _grid[coordinates];
 
 
     private void Awake()
     {
         _gridSnappingValue = Mathf.RoundToInt(UnityEditor.EditorSnapSettings.move.x);
+        if (_gridSnappingValue % 2 != 0) throw new System.Exception("Grid snapping value should be an even number");
         FillGridDictionaryWithInitlalValues();
-        // DebugPrintDictionary();
+    }
+
+    // TODO Remove testing code
+    private void Start()
+    {
+        DebugPrintDictionary();
+        print (_gridSnappingValue);
     }
 
     private void FillGridDictionaryWithInitlalValues()
@@ -29,8 +46,8 @@ public class Grid : MonoBehaviour
 
     private void DebugPrintDictionary()
     {
-        
-        foreach(var cell in _grid)
+
+        foreach (var cell in _grid)
         {
             Debug.Log(cell.Key + " " + cell.Value);
         }
