@@ -5,10 +5,10 @@ using UnityEngine;
 public class Grid : MonoBehaviour
 {
     [SerializeField] private Vector2Int gridDimensions;
-    [SerializeField] private static int _gridSnappingValue = 10;
+    [SerializeField] private int _gridSnappingValue = 10;
     private Dictionary<Vector2Int, CellType> _grid = new();
 
-    public static Vector2Int GetCoordinatesFromPosition(Vector3 position)
+    public Vector2Int GetCoordinatesFromPosition(Vector3 position)
     {
         Vector2Int coordinates = new Vector2Int(Mathf.RoundToInt(position.x / _gridSnappingValue), Mathf.RoundToInt(position.z / _gridSnappingValue));
         return coordinates;

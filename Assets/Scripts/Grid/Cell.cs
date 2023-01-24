@@ -32,7 +32,7 @@ public class Cell : MonoBehaviour
     private void Awake()
     {
         SetReferences();
-        var currentCoordinates = Grid.GetCoordinatesFromPosition(transform.position);
+        var currentCoordinates = _grid.GetCoordinatesFromPosition(transform.position);
         _grid.ChangeCellType(currentCoordinates, cellType);
         _bIsPlaceable = _grid.GetCellTypeForGivenCoordinates(currentCoordinates) == CellType.Grass;
 
@@ -83,7 +83,7 @@ public class Cell : MonoBehaviour
         // cellType = CellType.Tower;
 
         // TODO Testing
-        var coordinates = Grid.GetCoordinatesFromPosition(transform.position);
+        var coordinates = _grid.GetCoordinatesFromPosition(transform.position);
         _grid.ChangeCellType(coordinates, CellType.Tower);
         _bIsPlaceable = false;
     }
