@@ -131,11 +131,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d813c389b6bf4114893aa55a6a887403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellType: 1
-  towerPrefab: {fileID: 8704696727299002722, guid: 0c2adcc53c996e446b6d828beeac532d,
-    type: 3}
-  towerParentTag: towerparent
+  initialCellType: 1
   rangeDisplayMaterial: {fileID: 2100000, guid: 573f6cb1b20c13d41b1410546d90d9d3,
+    type: 2}
+  blockedGrassMaterial: {fileID: 2100000, guid: cc976dad6f9c88a44a7eba74cce11fd0,
     type: 2}
 --- !u!65 &693259808817541586
 BoxCollider:

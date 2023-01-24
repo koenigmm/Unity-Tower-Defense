@@ -6,13 +6,12 @@ using UnityEngine.Serialization;
 public class Cell : MonoBehaviour
 {
     
+    public bool _bIsStart { get => initialCellType == CellType.Start; }
     [SerializeField][FormerlySerializedAs("cellType")]private CellType initialCellType;
     [SerializeField] private Material rangeDisplayMaterial;
+    [SerializeField] private Material blockedGrassMaterial;
 
     private bool _bIsPlaceable = true;
-    public bool _bIsStart { get => initialCellType == CellType.Start; }
-
-
     private GameObject _sphere;
     private float _currentTowerPrefabRange;
     private EnemyWavePool enemyObjectPoolHandler;
@@ -49,6 +48,7 @@ public class Cell : MonoBehaviour
         _towerInstantiationManager.BuildTower(transform.position);
         _grid.ChangeCellType(_coordinatesFromGrid, CellType.Tower);
         _bIsPlaceable = false;
+        GetComponentInChildren<MeshRenderer>().material = blockedGrassMaterial;
     }
 
     private void OnMouseOver()
