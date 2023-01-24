@@ -45,7 +45,11 @@ public class Cell : MonoBehaviour
         if (!_bIsPlaceable || !enemyObjectPoolHandler.B_WaveCleared) return;
         if (!_towerInstantiationManager.IsInSelectionMode) return;
         if (!_gold.CanBuildWithCurrentMoney(_towerInstantiationManager.SelectedTower.BuildCost)) return;
+        BuildTower();
+    }
 
+    private void BuildTower()
+    {
         var tower = Instantiate(_towerInstantiationManager.SelectedTower.Prefab, transform.position, Quaternion.identity);
         tower.transform.parent = _towerParent.transform;
         tower.GetComponent<TowerController>().InitializeTowerValues(_towerInstantiationManager.SelectedTower.TowerClass);
