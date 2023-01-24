@@ -11,7 +11,7 @@ public class Cell : MonoBehaviour
     [SerializeField] private Material rangeDisplayMaterial;
     [SerializeField] private Material blockedGrassMaterial;
 
-    private bool _bIsPlaceable = true;
+    // private bool _bIsPlaceable = true;
     private GameObject _sphere;
     private float _currentTowerPrefabRange;
     private EnemyWavePool enemyObjectPoolHandler;
@@ -25,7 +25,7 @@ public class Cell : MonoBehaviour
         SetReferences();
         _coordinatesFromGrid = _grid.GetCoordinatesFromPosition(transform.position);
         _grid.ChangeCellType(_coordinatesFromGrid, initialCellType);
-        _bIsPlaceable = _grid.CanBuildOnCell(_coordinatesFromGrid);
+        // _bIsPlaceable = _grid.CanBuildOnCell(_coordinatesFromGrid);
     }
 
     private void Start() => CreateRangeDisplay();
@@ -37,7 +37,7 @@ public class Cell : MonoBehaviour
     private void OnMouseDown()
     {
         //TODO clean up |CanBuild?
-        if (!_bIsPlaceable || !enemyObjectPoolHandler.B_WaveCleared) return;
+        if (!_grid.CanBuildOnCell(_coordinatesFromGrid) || !enemyObjectPoolHandler.B_WaveCleared) return;
         if (!_towerInstantiationManager.IsInSelectionMode) return;
         if (!_gold.CanBuildWithCurrentMoney(_towerInstantiationManager.SelectedTower.BuildCost)) return;
         HandleTowerBuilding();
@@ -47,14 +47,14 @@ public class Cell : MonoBehaviour
     {
         _towerInstantiationManager.BuildTower(transform.position);
         _grid.ChangeCellType(_coordinatesFromGrid, CellType.Tower);
-        _bIsPlaceable = false;
+        // _bIsPlaceable = false;
         GetComponentInChildren<MeshRenderer>().material = blockedGrassMaterial;
     }
 
     private void OnMouseOver()
     {
         //TODO clean up | CanBuild?
-        if (!_bIsPlaceable || !enemyObjectPoolHandler.B_WaveCleared) return;
+        if ((!_grid.CanBuildOnCell(_coordinatesFromGrid)) || !enemyObjectPoolHandler.B_WaveCleared) return;
         if (!_towerInstantiationManager.IsInSelectionMode) return;
         _sphere.SetActive(_towerInstantiationManager.IsInSelectionMode);
     }

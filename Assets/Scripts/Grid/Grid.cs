@@ -27,7 +27,33 @@ public class Grid : MonoBehaviour
     // TODO Remove testing code
     private void Start()
     {
-        DebugPrintDictionary();
+        // DebugPrintDictionary();
+    }
+
+    public Vector3 GetPositionFromCoordinates(Vector2 coordinates)
+    {
+        Vector3 position = Vector3.zero;
+        position.x = coordinates.x * _gridSnappingValue;
+        position.y = 0;
+        position.z = coordinates.y * _gridSnappingValue;
+
+        return position;
+    }
+
+    public Vector2Int GetNeighborCoordinates(Vector2Int coordinates, bool inXDirection = true)
+    {
+        var neighborCoordinates = coordinates;
+
+        if (inXDirection)
+        {
+            neighborCoordinates.x++;
+        }
+        else 
+        {
+            neighborCoordinates.y++;
+        }
+
+        return neighborCoordinates;
     }
 
     private void FillGridDictionaryWithInitlalValues()
@@ -42,7 +68,8 @@ public class Grid : MonoBehaviour
         }
     }
 
-    private void DebugPrintDictionary()
+    //TODO Remove testing
+    public void DebugPrintDictionary()
     {
         foreach (var cell in _grid)
         {
