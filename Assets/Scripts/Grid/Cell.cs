@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public enum CellType
 {
@@ -14,12 +15,13 @@ public enum CellType
 
 public class Cell : MonoBehaviour
 {
-    [SerializeField] CellType cellType;
+    
+    [SerializeField][FormerlySerializedAs("cellType")] CellType initialCellType;
     [SerializeField] string towerParentTag;
     [SerializeField] Material rangeDisplayMaterial;
 
     private bool _bIsPlaceable = true;
-    public bool _bIsStart { get => cellType == CellType.Start; }
+    public bool _bIsStart { get => initialCellType == CellType.Start; }
 
     private GameObject _towerParent;
     private GameObject _sphere;
@@ -33,8 +35,8 @@ public class Cell : MonoBehaviour
     private void Awake()
     {
         SetReferences();
-        _coordinatesFromGrid= _grid.GetCoordinatesFromPosition(transform.position);
-        _grid.ChangeCellType(_coordinatesFromGrid, cellType);
+        _coordinatesFromGrid = _grid.GetCoordinatesFromPosition(transform.position);
+        _grid.ChangeCellType(_coordinatesFromGrid, initialCellType);
         _bIsPlaceable = _grid.CanBuildOnCell(_coordinatesFromGrid);
 
         if (_towerParent != null) return;
