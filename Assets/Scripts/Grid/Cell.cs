@@ -3,16 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public enum CellType
-{
-    Tower,
-    Grass,
-    Way,
-    Start,
-    End,
-    Blocked
-}
-
 public class Cell : MonoBehaviour
 {
     
