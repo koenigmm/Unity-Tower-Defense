@@ -5,7 +5,7 @@ using UnityEngine;
 public class Grid : MonoBehaviour
 {
     [SerializeField] private Vector2Int gridDimensions;
-    private static int _gridSnappingValue;
+    [SerializeField] private static int _gridSnappingValue = 10;
     private Dictionary<Vector2Int, CellType> _grid = new();
 
     public static Vector2Int GetCoordinatesFromPosition(Vector3 position)
@@ -21,8 +21,8 @@ public class Grid : MonoBehaviour
 
     private void Awake()
     {
-        _gridSnappingValue = Mathf.RoundToInt(UnityEditor.EditorSnapSettings.move.x);
-        if (_gridSnappingValue % 2 != 0) throw new System.Exception("Grid snapping value should be an even number");
+        // _gridSnappingValue = Mathf.RoundToInt(UnityEditor.EditorSnapSettings.move.x);
+        // if (_gridSnappingValue % 2 != 0) throw new System.Exception("Grid snapping value should be an even number");
         FillGridDictionaryWithInitlalValues();
     }
 
