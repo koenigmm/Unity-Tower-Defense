@@ -706,6 +706,16 @@ PrefabInstance:
       propertyPath: cellType
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2375215294367072698, guid: 985518bef71bbbb489b1e616f521f5e0,
+        type: 3}
+      propertyPath: gridDimensions.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2375215294367072698, guid: 985518bef71bbbb489b1e616f521f5e0,
+        type: 3}
+      propertyPath: gridDimensions.y
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5862756844712998365, guid: 985518bef71bbbb489b1e616f521f5e0,
         type: 3}
       propertyPath: m_Name
