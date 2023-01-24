@@ -73,6 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e83a92cffd64da24ea9b34064bd4ccd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsInSelectionMode: 0
   towers:
   - <TowerClass>k__BackingField: 0
     <B_canCauseDamage>k__BackingField: 1
@@ -84,6 +85,7 @@ MonoBehaviour:
       type: 3}
     <Projectile>k__BackingField: {fileID: 8667883569548471551, guid: 1434b5b17361d7f488af4b4e2c577cc8,
       type: 3}
+    RequiredCellsForBuilding: {x: 1, y: 1}
   - <TowerClass>k__BackingField: 1
     <B_canCauseDamage>k__BackingField: 1
     <Damage>k__BackingField: 100
@@ -94,6 +96,7 @@ MonoBehaviour:
       type: 3}
     <Projectile>k__BackingField: {fileID: 8667883569548471551, guid: 1434b5b17361d7f488af4b4e2c577cc8,
       type: 3}
+    RequiredCellsForBuilding: {x: 1, y: 1}
   - <TowerClass>k__BackingField: 2
     <B_canCauseDamage>k__BackingField: 0
     <Damage>k__BackingField: 0
@@ -104,4 +107,5 @@ MonoBehaviour:
       type: 3}
     <Projectile>k__BackingField: {fileID: 1874346347540289967, guid: 375be79d53413324bbacd76b56625f38,
       type: 3}
-  IsInSelectionMode: 0
+    RequiredCellsForBuilding: {x: 1, y: 1}
+  towerParentTag: towerparent

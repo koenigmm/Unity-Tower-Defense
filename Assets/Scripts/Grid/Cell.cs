@@ -6,14 +6,13 @@ using UnityEngine.Serialization;
 public class Cell : MonoBehaviour
 {
     
-    [SerializeField][FormerlySerializedAs("cellType")] CellType initialCellType;
-    [SerializeField] string towerParentTag;
-    [SerializeField] Material rangeDisplayMaterial;
+    [SerializeField][FormerlySerializedAs("cellType")]private CellType initialCellType;
+    [SerializeField] private Material rangeDisplayMaterial;
 
     private bool _bIsPlaceable = true;
     public bool _bIsStart { get => initialCellType == CellType.Start; }
 
-    private GameObject _towerParent;
+
     private GameObject _sphere;
     private float _currentTowerPrefabRange;
     private EnemyWavePool enemyObjectPoolHandler;
@@ -28,9 +27,6 @@ public class Cell : MonoBehaviour
         _coordinatesFromGrid = _grid.GetCoordinatesFromPosition(transform.position);
         _grid.ChangeCellType(_coordinatesFromGrid, initialCellType);
         _bIsPlaceable = _grid.CanBuildOnCell(_coordinatesFromGrid);
-
-        if (_towerParent != null) return;
-        CreateParentGameObject();
     }
 
     private void Start() => CreateRangeDisplay();
@@ -45,18 +41,14 @@ public class Cell : MonoBehaviour
         if (!_bIsPlaceable || !enemyObjectPoolHandler.B_WaveCleared) return;
         if (!_towerInstantiationManager.IsInSelectionMode) return;
         if (!_gold.CanBuildWithCurrentMoney(_towerInstantiationManager.SelectedTower.BuildCost)) return;
-        BuildTower();
+        HandleTowerBuilding();
     }
 
-    private void BuildTower()
+    private void HandleTowerBuilding()
     {
-        var tower = Instantiate(_towerInstantiationManager.SelectedTower.Prefab, transform.position, Quaternion.identity);
-        tower.transform.parent = _towerParent.transform;
-        tower.GetComponent<TowerController>().InitializeTowerValues(_towerInstantiationManager.SelectedTower.TowerClass);
-        _gold.DecreaseAmountOfGold(_towerInstantiationManager.SelectedTower.BuildCost);
-        _towerInstantiationManager.IsInSelectionMode = false;
-        SetCellTypeToTower();
-        _sphere.SetActive(false);
+        _towerInstantiationManager.BuildTower(transform.position);
+        _grid.ChangeCellType(_coordinatesFromGrid, CellType.Tower);
+        _bIsPlaceable = false;
     }
 
     private void OnMouseOver()
@@ -69,24 +61,9 @@ public class Cell : MonoBehaviour
 
     private void OnMouseExit() => _sphere.SetActive(false);
 
-    private void SetCellTypeToTower()
-    {
-        // if (cellType != CellType.Grass)
-        // {
-        //     Debug.LogWarning("Only grass cells can be changed");
-        //     return;
-        // }
-
-        // cellType = CellType.Tower;
-
-        // TODO Testing
-        _grid.ChangeCellType(_coordinatesFromGrid, CellType.Tower);
-        _bIsPlaceable = false;
-    }
-
     private void SetReferences()
     {
-        _towerParent = GameObject.FindGameObjectWithTag(towerParentTag);
+        
         enemyObjectPoolHandler = GameObject.FindObjectOfType<EnemyWavePool>();
         _towerInstantiationManager = GameObject.FindObjectOfType<TowerInstantiationManager>();
         _gold = GameObject.FindObjectOfType<Gold>();
@@ -115,13 +92,5 @@ public class Cell : MonoBehaviour
         const float yScaleDivisor = 5f;
         float sphereYScale = _currentTowerPrefabRange / yScaleDivisor;
         _sphere.transform.localScale = new Vector3(_currentTowerPrefabRange, sphereYScale, _currentTowerPrefabRange);
-    }
-
-    private void CreateParentGameObject()
-    {
-        GameObject newParent = new GameObject();
-        newParent.name = towerParentTag;
-        newParent.tag = towerParentTag;
-        _towerParent = newParent;
     }
 }

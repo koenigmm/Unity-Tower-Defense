@@ -20,8 +20,6 @@ public class TowerController : MonoBehaviour
     private float _timeBetweenAtacks;
     private int _damage;
 
-
-    // Public functions
     public void InitializeTowerValues(TowerType towerType)
     {
         _towerType = towerType;
@@ -32,27 +30,17 @@ public class TowerController : MonoBehaviour
         _sphereCollider.radius = _towerInstantiationManager.SelectedTower.Range;
     }
 
-    // Unity event functions
+
     private void Awake()
     {
         _sphereCollider = GetComponent<SphereCollider>();
         _towerInstantiationManager = FindObjectOfType<TowerInstantiationManager>();
     }
 
-    private void Start()
-    {
-        // InitializeTowerValues(_towerType);
-    }
-
     private void Update()
     {
         LookAtTarget();
         FindAndSetClosestTarget();
-    }
-
-    void OnEnable()
-    {
-
     }
 
     private void OnTriggerEnter(Collider other)
