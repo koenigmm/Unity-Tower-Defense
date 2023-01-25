@@ -19,7 +19,6 @@ public class Grid : MonoBehaviour
 
     public void ChangeCellType(Vector2Int coordinates, CellType cellType)
     {
-        // OnCellTypeChange?.Invoke(coordinates);
         _grid[coordinates] = cellType;
 
         if (cellType == CellType.Tower)
@@ -38,9 +37,6 @@ public class Grid : MonoBehaviour
         {
             ChangeCellType(neighbor, CellType.Tower);
         }
-
-
-        // DebugPrintDictionary();
     }
 
     public bool IsAreaBlocked(Vector3 position, int xRange, int yRange)
@@ -48,7 +44,6 @@ public class Grid : MonoBehaviour
         Vector2Int coordinates = GetCoordinatesFromPosition(position);
         var neighborCoordinates = GetNeighborCoordinates(coordinates, xRange, yRange);
 
-        DebugPrintDictionary();
 
         foreach (var neighbor in neighborCoordinates)
         {
@@ -68,11 +63,6 @@ public class Grid : MonoBehaviour
         // _gridSnappingValue = Mathf.RoundToInt(UnityEditor.EditorSnapSettings.move.x);
         if (_gridSnappingValue % 2 != 0) throw new System.Exception("Grid snapping value should be an even number");
         FillGridDictionaryWithInitlalValues();
-    }
-
-    private void Start()
-    {
-        DebugPrintDictionary();
     }
 
     // TODO remove?
@@ -116,13 +106,13 @@ public class Grid : MonoBehaviour
     }
 
     //TODO Remove testing
-    public void DebugPrintDictionary()
-    {
-        foreach (var cell in _grid)
-        {
-            Debug.Log(cell.Key + " " + cell.Value);
-        }
-    }
+    // private void DebugPrintDictionary()
+    // {
+    //     foreach (var cell in _grid)
+    //     {
+    //         Debug.Log(cell.Key + " " + cell.Value);
+    //     }
+    // }
 
     private CellType GetCellTypeForGivenCoordinates(Vector2Int coordinates) => _grid[coordinates];
 }
