@@ -6,7 +6,7 @@ using UnityEngine;
 public class Grid : MonoBehaviour
 {
     //TODO remove | obsolet?
-    public Action <Vector2Int> OnCellTypeChange;
+    public Action<Vector2Int> OnCellTypeChange;
     [SerializeField] private Vector2Int gridDimensions;
     [SerializeField] private int _gridSnappingValue = 10;
     private Dictionary<Vector2Int, CellType> _grid = new();
@@ -19,23 +19,46 @@ public class Grid : MonoBehaviour
 
     public void ChangeCellType(Vector2Int coordinates, CellType cellType)
     {
-        OnCellTypeChange?.Invoke(coordinates);
+        // OnCellTypeChange?.Invoke(coordinates);
         _grid[coordinates] = cellType;
+
+        if (cellType == CellType.Tower)
+        {
+            OnCellTypeChange?.Invoke(coordinates);
+        }
     }
 
-     public void ChangeCellsToTower(Vector3 position, int xRange, int yRange)
+    public void ChangeCellsToTower(Vector3 position, int xRange, int yRange)
     {
         var coordinates = GetCoordinatesFromPosition(position);
-        print(coordinates);
+        // print(coordinates);
         var neighborCoordinates = GetNeighborCoordinates(coordinates, xRange, yRange);
 
         foreach (var neighbor in neighborCoordinates)
         {
             ChangeCellType(neighbor, CellType.Tower);
         }
-        
+
+
+        // DebugPrintDictionary();
+    }
+
+    public bool IsAreaBlocked(Vector3 position, int xRange, int yRange)
+    {
+        Vector2Int coordinates = GetCoordinatesFromPosition(position);
+        var neighborCoordinates = GetNeighborCoordinates(coordinates, xRange, yRange);
 
         DebugPrintDictionary();
+
+        foreach (var neighbor in neighborCoordinates)
+        {
+            Debug.Log(GetCellTypeForGivenCoordinates(neighbor) + " " + neighbor);
+            if (GetCellTypeForGivenCoordinates(neighbor) != CellType.Grass)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public bool CanBuildOnCell(Vector2Int coordinates) => GetCellTypeForGivenCoordinates(coordinates) == CellType.Grass;
@@ -45,6 +68,11 @@ public class Grid : MonoBehaviour
         // _gridSnappingValue = Mathf.RoundToInt(UnityEditor.EditorSnapSettings.move.x);
         if (_gridSnappingValue % 2 != 0) throw new System.Exception("Grid snapping value should be an even number");
         FillGridDictionaryWithInitlalValues();
+    }
+
+    private void Start()
+    {
+        DebugPrintDictionary();
     }
 
     // TODO remove?

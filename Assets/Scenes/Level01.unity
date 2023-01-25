@@ -701,6 +701,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: GridCells
       objectReference: {fileID: 0}
+    - target: {fileID: 2375215294367072698, guid: 985518bef71bbbb489b1e616f521f5e0,
+        type: 3}
+      propertyPath: gridDimensions.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2375215294367072698, guid: 985518bef71bbbb489b1e616f521f5e0,
+        type: 3}
+      propertyPath: gridDimensions.y
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 985518bef71bbbb489b1e616f521f5e0, type: 3}
 --- !u!1001 &2310539309514216606

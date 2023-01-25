@@ -25,12 +25,19 @@ public class Cell : MonoBehaviour
     private void Awake()
     {
         SetReferences();
-        _coordinatesFromGrid = _grid.GetCoordinatesFromPosition(transform.position);
-        _grid.ChangeCellType(_coordinatesFromGrid, initialCellType);
+        
+
+        // if (initialCellType != CellType.Grass)
+        // Debug.Log(initialCellType + " " + transform.position);
         // _bIsPlaceable = _grid.CanBuildOnCell(_coordinatesFromGrid);
     }
 
-    private void Start() => CreateRangeDisplay();
+    private void Start()
+    {
+        _coordinatesFromGrid = _grid.GetCoordinatesFromPosition(transform.position);
+        _grid.ChangeCellType(_coordinatesFromGrid, initialCellType);
+        CreateRangeDisplay();
+    }
 
     private void OnEnable()
     {
@@ -50,6 +57,17 @@ public class Cell : MonoBehaviour
         if (!_grid.CanBuildOnCell(_coordinatesFromGrid) || !enemyObjectPoolHandler.B_WaveCleared) return;
         if (!_towerInstantiationManager.IsInSelectionMode) return;
         if (!_gold.CanBuildWithCurrentMoney(_towerInstantiationManager.SelectedTower.BuildCost)) return;
+
+        var requiredCells = _towerInstantiationManager.SelectedTower.RequiredCellsForBuilding;
+        if (requiredCells.x > 1 || requiredCells.y > 1)
+        {
+            Debug.Log("dimension > 1");
+            bool isAreaBlocked = _grid.IsAreaBlocked(transform.position, requiredCells.x, requiredCells.y);
+            
+            if (isAreaBlocked)
+                return;
+        }
+        
         HandleTowerBuilding();
     }
 
@@ -61,10 +79,10 @@ public class Cell : MonoBehaviour
         _meshRenderer.material = blockedGrassMaterial;
     }
 
-     private void HandleCellTypeChange(Vector2Int coordinates)
+    private void HandleCellTypeChange(Vector2Int coordinates)
     {
         var changedPositionFromGrid = _grid.GetPositionFromCoordinates(coordinates);
-        if (transform.position == changedPositionFromGrid)
+        if (transform.position == changedPositionFromGrid )
         {
             _meshRenderer.material = blockedGrassMaterial;
         }
