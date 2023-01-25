@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c31a44142c31204aa1cfeba53e2019b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 75
 --- !u!114 &971681695661497892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4934b46cac6bc149a822c7f6f79bcd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reward: 10
+  reward: 20
 --- !u!1 &6799322472260648653
 GameObject:
   m_ObjectHideFlags: 0

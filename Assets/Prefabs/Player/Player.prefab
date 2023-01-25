@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f47750beedd97941a3a82fa4a913883, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialAmountOfGold: 120
+  initialAmountOfGold: 150
 --- !u!114 &313977266381724764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,7 +80,7 @@ MonoBehaviour:
     <Damage>k__BackingField: 25
     <BuildCost>k__BackingField: 50
     <Range>k__BackingField: 30
-    <TimeBetweenAttacks>k__BackingField: 2
+    <TimeBetweenAttacks>k__BackingField: 3
     <Prefab>k__BackingField: {fileID: 6918211265490226829, guid: 4376cf8b2fa208545b5f3d622d6b1510,
       type: 3}
     <Projectile>k__BackingField: {fileID: 8667883569548471551, guid: 1434b5b17361d7f488af4b4e2c577cc8,
@@ -89,9 +89,9 @@ MonoBehaviour:
   - <TowerClass>k__BackingField: 1
     <B_canCauseDamage>k__BackingField: 1
     <Damage>k__BackingField: 100
-    <BuildCost>k__BackingField: 100
-    <Range>k__BackingField: 10
-    <TimeBetweenAttacks>k__BackingField: 5
+    <BuildCost>k__BackingField: 150
+    <Range>k__BackingField: 30
+    <TimeBetweenAttacks>k__BackingField: 7
     <Prefab>k__BackingField: {fileID: 8704696727299002722, guid: 12c18a3afb0b22445a5e513bcb5beff2,
       type: 3}
     <Projectile>k__BackingField: {fileID: 8667883569548471551, guid: 1434b5b17361d7f488af4b4e2c577cc8,

@@ -314,7 +314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _label: {fileID: 9167091982324261346}
-  _bCanShowCoordinatesInPlayMode: 1
+  _bCanShowCoordinatesInPlayMode: 0
   _bShouldDivideByGridSize: 1
 --- !u!1 &9167091982807560145
 GameObject:

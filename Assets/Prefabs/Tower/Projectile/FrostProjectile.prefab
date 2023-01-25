@@ -67,6 +67,11 @@ PrefabInstance:
       propertyPath: projectileType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5569864844301379260, guid: 41ed4554daaa6ac42933184a32d1be51,
+        type: 3}
+      propertyPath: slowingDuration
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6470339120188991406, guid: 41ed4554daaa6ac42933184a32d1be51,
         type: 3}
       propertyPath: m_Name
