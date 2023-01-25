@@ -61,13 +61,12 @@ public class Cell : MonoBehaviour
         var requiredCells = _towerInstantiationManager.SelectedTower.RequiredCellsForBuilding;
         if (requiredCells.x > 1 || requiredCells.y > 1)
         {
-            Debug.Log("dimension > 1");
             bool isAreaBlocked = _grid.IsAreaBlocked(transform.position, requiredCells.x, requiredCells.y);
             
             if (isAreaBlocked)
                 return;
         }
-        
+
         HandleTowerBuilding();
     }
 

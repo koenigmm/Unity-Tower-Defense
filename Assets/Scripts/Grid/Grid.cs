@@ -47,11 +47,9 @@ public class Grid : MonoBehaviour
 
         foreach (var neighbor in neighborCoordinates)
         {
-            Debug.Log(GetCellTypeForGivenCoordinates(neighbor) + " " + neighbor);
             if (GetCellTypeForGivenCoordinates(neighbor) != CellType.Grass)
-            {
                 return true;
-            }
+            
         }
         return false;
     }
