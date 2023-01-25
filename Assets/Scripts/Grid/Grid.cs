@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
+    //TODO remove | obsolet?
+    public Action OnCellTypeChange;
     [SerializeField] private Vector2Int gridDimensions;
     [SerializeField] private int _gridSnappingValue = 10;
     private Dictionary<Vector2Int, CellType> _grid = new();
@@ -14,7 +17,11 @@ public class Grid : MonoBehaviour
         return coordinates;
     }
 
-    public void ChangeCellType(Vector2Int coordinates, CellType cellType) => _grid[coordinates] = cellType;
+    public void ChangeCellType(Vector2Int coordinates, CellType cellType)
+    {
+        OnCellTypeChange?.Invoke();
+        _grid[coordinates] = cellType;
+    }
     public bool CanBuildOnCell(Vector2Int coordinates) => GetCellTypeForGivenCoordinates(coordinates) == CellType.Grass;
 
     private void Awake()
@@ -40,6 +47,25 @@ public class Grid : MonoBehaviour
         return position;
     }
 
+    public void ChangeCellsToTower(Vector3 position, int xCells, int yCells)
+    {
+        var coordinates = GetCoordinatesFromPosition(position);
+        print(coordinates);
+
+        for (int x = 0; x < xCells; x++)
+        {
+            for (int y = 0; y < yCells; y++)
+            {
+                if (x == 0 && y == 0) continue;
+                Vector2Int nextPosition = new Vector2Int(coordinates.x + x, coordinates.y + y);
+                // print (nextPosition);
+                ChangeCellType(nextPosition, CellType.Tower);
+            }
+        }
+
+        DebugPrintDictionary();
+    }
+
     public Vector2Int GetNeighborCoordinates(Vector2Int coordinates, bool inXDirection = true)
     {
         var neighborCoordinates = coordinates;
@@ -48,7 +74,7 @@ public class Grid : MonoBehaviour
         {
             neighborCoordinates.x++;
         }
-        else 
+        else
         {
             neighborCoordinates.y++;
         }

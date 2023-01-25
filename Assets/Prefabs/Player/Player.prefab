@@ -107,5 +107,5 @@ MonoBehaviour:
       type: 3}
     <Projectile>k__BackingField: {fileID: 1874346347540289967, guid: 375be79d53413324bbacd76b56625f38,
       type: 3}
-    RequiredCellsForBuilding: {x: 1, y: 1}
+    RequiredCellsForBuilding: {x: 2, y: 1}
   towerParentTag: towerparent

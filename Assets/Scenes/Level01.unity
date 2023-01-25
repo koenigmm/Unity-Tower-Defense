@@ -888,16 +888,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 313977266381724764, guid: c9acdf49cd20fdf4bb8148a997ae3ba5,
-        type: 3}
-      propertyPath: towers.Array.data[2].RequiredCellsForBuilding.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 313977266381724764, guid: c9acdf49cd20fdf4bb8148a997ae3ba5,
-        type: 3}
-      propertyPath: towers.Array.data[2].RequiredCellsForBuilding.y
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 5762244732648108945, guid: c9acdf49cd20fdf4bb8148a997ae3ba5,
         type: 3}
       propertyPath: m_Name
