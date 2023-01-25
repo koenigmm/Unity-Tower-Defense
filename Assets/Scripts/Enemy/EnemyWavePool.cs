@@ -9,7 +9,7 @@ public class EnemyWavePool : MonoBehaviour
     public int Wave { get => wave; }
     public bool B_WaveCleared { get => _bWaveCleard; }
     [SerializeField] private int defeatedEnemies;
-    [SerializeField] private float timeBetwwenEnemySpawn = 2f;
+    [SerializeField] private float timeBetweenEnemySpawn = 2f;
     [SerializeField] private List<Enemy> enemyTypeList = new();
     [SerializeField] private int healthBonusForNextWave = 5;
     private int _amountOfEnemiesInPool;
@@ -72,7 +72,7 @@ public class EnemyWavePool : MonoBehaviour
             var currentEnemy = enemies[counter];
             currentEnemy.gameObject.SetActive(true);
             currentEnemy.OnDie += HandleDeath;
-            yield return new WaitForSeconds(timeBetwwenEnemySpawn);
+            yield return new WaitForSeconds(timeBetweenEnemySpawn);
             counter++;
         }
 
