@@ -11,6 +11,7 @@ public class EnemyWavePool : MonoBehaviour
     [SerializeField] private int defeatedEnemies;
     [SerializeField] private float timeBetwwenEnemySpawn = 2f;
     [SerializeField] private List<Enemy> enemyTypeList = new();
+    [SerializeField] private int healthBonusForNextWave = 5;
     private int _amountOfEnemiesInPool;
     private int wave = 1;
     private List<Health> enemies = new();
@@ -63,10 +64,10 @@ public class EnemyWavePool : MonoBehaviour
         var counter = 0;
         OnWavePhase?.Invoke();
 
-        while (counter < wave)
+        while (counter < enemies.Count)
         {
-            if (_bWaveCleard)
-                break;
+            // if (_bWaveCleard)
+            //     break;
 
             var currentEnemy = enemies[counter];
             currentEnemy.gameObject.SetActive(true);
@@ -75,8 +76,10 @@ public class EnemyWavePool : MonoBehaviour
             counter++;
         }
 
-        if (counter == _amountOfEnemiesInPool) 
-            FillPool();
+        // TODO Auto fill?
+        // if (counter == _amountOfEnemiesInPool) 
+        //     FillPool();
+
 
     }
 
@@ -84,8 +87,9 @@ public class EnemyWavePool : MonoBehaviour
     {
         health.OnDie -= HandleDeath;
         defeatedEnemies++;
+        health.IncreaseMaxHealth(healthBonusForNextWave);
 
-        if (defeatedEnemies == wave)
+        if (defeatedEnemies == enemies.Count)
             _bWaveCleard = true;
 
         if (_bWaveCleard)

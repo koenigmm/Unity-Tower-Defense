@@ -48,15 +48,15 @@ MonoBehaviour:
   timeBetwwenEnemySpawn: 2
   enemyTypeList:
   - <EnemyType>k__BackingField: 0
-    <InitialAmountInObjectPool>k__BackingField: 2
+    <InitialAmountInObjectPool>k__BackingField: 5
     <Prefab>k__BackingField: {fileID: 6799322471823785858, guid: 5f03f8feb73445c46aa1303d086f64e1,
       type: 3}
   - <EnemyType>k__BackingField: 1
-    <InitialAmountInObjectPool>k__BackingField: 1
+    <InitialAmountInObjectPool>k__BackingField: 5
     <Prefab>k__BackingField: {fileID: 6799322471823785858, guid: a5c1cedc5bf703247aa39fb9d1637a2d,
       type: 3}
   - <EnemyType>k__BackingField: 2
-    <InitialAmountInObjectPool>k__BackingField: 1
+    <InitialAmountInObjectPool>k__BackingField: 3
     <Prefab>k__BackingField: {fileID: 6799322471823785858, guid: 5f03f8feb73445c46aa1303d086f64e1,
       type: 3}
-  _bShouldStartWave: 0
+  healthBonusForNextWave: 5

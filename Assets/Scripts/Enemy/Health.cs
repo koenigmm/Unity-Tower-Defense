@@ -28,4 +28,10 @@ public class Health : MonoBehaviour
         OnDefeat?.Invoke();
         gameObject.SetActive(false);
     }
+
+    public void IncreaseMaxHealth(int amount)
+    {
+        maxHealth += amount;
+        print(maxHealth);
+    }
 }
