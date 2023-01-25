@@ -22,6 +22,22 @@ public class Grid : MonoBehaviour
         OnCellTypeChange?.Invoke();
         _grid[coordinates] = cellType;
     }
+
+     public void ChangeCellsToTower(Vector3 position, int xRange, int yRange)
+    {
+        var coordinates = GetCoordinatesFromPosition(position);
+        print(coordinates);
+        var neighborCoordinates = GetNeighborCoordinates(coordinates, xRange, yRange);
+
+        foreach (var neighbor in neighborCoordinates)
+        {
+            ChangeCellType(neighbor, CellType.Tower);
+        }
+        
+
+        DebugPrintDictionary();
+    }
+    
     public bool CanBuildOnCell(Vector2Int coordinates) => GetCellTypeForGivenCoordinates(coordinates) == CellType.Grass;
 
     private void Awake()
@@ -31,57 +47,32 @@ public class Grid : MonoBehaviour
         FillGridDictionaryWithInitlalValues();
     }
 
-    // TODO Remove testing code
-    private void Start()
-    {
-        // DebugPrintDictionary();
-    }
-
     // TODO remove?
-    private Vector3 GetPositionFromCoordinates(Vector2 coordinates)
+    // private Vector3 GetPositionFromCoordinates(Vector2 coordinates)
+    // {
+    //     Vector3 position = Vector3.zero;
+    //     position.x = coordinates.x * _gridSnappingValue;
+    //     position.y = 0;
+    //     position.z = coordinates.y * _gridSnappingValue;
+
+    //     return position;
+    // }
+
+    private List<Vector2Int> GetNeighborCoordinates(Vector2Int coordinates, int xRange, int yRange)
     {
-        Vector3 position = Vector3.zero;
-        position.x = coordinates.x * _gridSnappingValue;
-        position.y = 0;
-        position.z = coordinates.y * _gridSnappingValue;
+        List<Vector2Int> coordinatesInRange = new();
 
-        return position;
-    }
-
-    public void ChangeCellsToTower(Vector3 position, int xCells, int yCells)
-    {
-        var coordinates = GetCoordinatesFromPosition(position);
-        print(coordinates);
-
-        for (int x = 0; x < xCells; x++)
+        for (int x = 0; x < xRange; x++)
         {
-            for (int y = 0; y < yCells; y++)
+            for (int y = 0; y < yRange; y++)
             {
                 if (x == 0 && y == 0) continue;
                 Vector2Int nextPosition = new Vector2Int(coordinates.x + x, coordinates.y + y);
-                // print (nextPosition);
-                ChangeCellType(nextPosition, CellType.Tower);
+                coordinatesInRange.Add(nextPosition);
+                // ChangeCellType(nextPosition, CellType.Tower);
             }
         }
-
-        DebugPrintDictionary();
-    }
-
-    //TODO remove
-    private  Vector2Int GetNeighborCoordinates(Vector2Int coordinates, bool inXDirection = true)
-    {
-        var neighborCoordinates = coordinates;
-
-        if (inXDirection)
-        {
-            neighborCoordinates.x++;
-        }
-        else
-        {
-            neighborCoordinates.y++;
-        }
-
-        return neighborCoordinates;
+        return coordinatesInRange;
     }
 
     private void FillGridDictionaryWithInitlalValues()
