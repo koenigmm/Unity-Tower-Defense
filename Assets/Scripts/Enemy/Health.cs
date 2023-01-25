@@ -32,6 +32,6 @@ public class Health : MonoBehaviour
     public void IncreaseMaxHealth(int amount)
     {
         maxHealth += amount;
-        print(maxHealth);
+        // print(maxHealth);
     }
 }
