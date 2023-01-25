@@ -37,7 +37,8 @@ public class Grid : MonoBehaviour
         // DebugPrintDictionary();
     }
 
-    public Vector3 GetPositionFromCoordinates(Vector2 coordinates)
+    // TODO remove?
+    private Vector3 GetPositionFromCoordinates(Vector2 coordinates)
     {
         Vector3 position = Vector3.zero;
         position.x = coordinates.x * _gridSnappingValue;
@@ -66,7 +67,8 @@ public class Grid : MonoBehaviour
         DebugPrintDictionary();
     }
 
-    public Vector2Int GetNeighborCoordinates(Vector2Int coordinates, bool inXDirection = true)
+    //TODO remove
+    private  Vector2Int GetNeighborCoordinates(Vector2Int coordinates, bool inXDirection = true)
     {
         var neighborCoordinates = coordinates;
 
