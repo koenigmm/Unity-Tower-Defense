@@ -6,7 +6,7 @@ using UnityEngine;
 public class Grid : MonoBehaviour
 {
     //TODO remove | obsolet?
-    public Action OnCellTypeChange;
+    public Action <Vector2Int> OnCellTypeChange;
     [SerializeField] private Vector2Int gridDimensions;
     [SerializeField] private int _gridSnappingValue = 10;
     private Dictionary<Vector2Int, CellType> _grid = new();
@@ -19,7 +19,7 @@ public class Grid : MonoBehaviour
 
     public void ChangeCellType(Vector2Int coordinates, CellType cellType)
     {
-        OnCellTypeChange?.Invoke();
+        OnCellTypeChange?.Invoke(coordinates);
         _grid[coordinates] = cellType;
     }
 
@@ -37,7 +37,7 @@ public class Grid : MonoBehaviour
 
         DebugPrintDictionary();
     }
-    
+
     public bool CanBuildOnCell(Vector2Int coordinates) => GetCellTypeForGivenCoordinates(coordinates) == CellType.Grass;
 
     private void Awake()
@@ -48,15 +48,15 @@ public class Grid : MonoBehaviour
     }
 
     // TODO remove?
-    // private Vector3 GetPositionFromCoordinates(Vector2 coordinates)
-    // {
-    //     Vector3 position = Vector3.zero;
-    //     position.x = coordinates.x * _gridSnappingValue;
-    //     position.y = 0;
-    //     position.z = coordinates.y * _gridSnappingValue;
+    public Vector3 GetPositionFromCoordinates(Vector2 coordinates)
+    {
+        Vector3 position = Vector3.zero;
+        position.x = coordinates.x * _gridSnappingValue;
+        position.y = 0;
+        position.z = coordinates.y * _gridSnappingValue;
 
-    //     return position;
-    // }
+        return position;
+    }
 
     private List<Vector2Int> GetNeighborCoordinates(Vector2Int coordinates, int xRange, int yRange)
     {

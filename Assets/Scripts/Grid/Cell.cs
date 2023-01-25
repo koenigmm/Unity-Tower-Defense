@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,9 @@ using UnityEngine.Serialization;
 
 public class Cell : MonoBehaviour
 {
-    
+
     public bool _bIsStart { get => initialCellType == CellType.Start; }
-    [SerializeField][FormerlySerializedAs("cellType")]private CellType initialCellType;
+    [SerializeField][FormerlySerializedAs("cellType")] private CellType initialCellType;
     [SerializeField] private Material rangeDisplayMaterial;
     [SerializeField] private Material blockedGrassMaterial;
 
@@ -19,6 +20,7 @@ public class Cell : MonoBehaviour
     private Gold _gold;
     private Grid _grid;
     private Vector2Int _coordinatesFromGrid = Vector2Int.zero;
+    private MeshRenderer _meshRenderer;
 
     private void Awake()
     {
@@ -30,9 +32,17 @@ public class Cell : MonoBehaviour
 
     private void Start() => CreateRangeDisplay();
 
-    private void OnEnable() => _towerInstantiationManager.OnSelectNewTowerType += SetRangeDisplayScale;
+    private void OnEnable()
+    {
+        _grid.OnCellTypeChange += HandleCellTypeChange;
+        _towerInstantiationManager.OnSelectNewTowerType += SetRangeDisplayScale;
+    }
 
-    private void OnDisable() => _towerInstantiationManager.OnSelectNewTowerType -= SetRangeDisplayScale;
+    private void OnDisable()
+    {
+        _grid.OnCellTypeChange -= HandleCellTypeChange;
+        _towerInstantiationManager.OnSelectNewTowerType -= SetRangeDisplayScale;
+    }
 
     private void OnMouseDown()
     {
@@ -48,7 +58,16 @@ public class Cell : MonoBehaviour
         _towerInstantiationManager.BuildTower(transform.position);
         _grid.ChangeCellType(_coordinatesFromGrid, CellType.Tower);
         // _bIsPlaceable = false;
-        GetComponentInChildren<MeshRenderer>().material = blockedGrassMaterial;
+        _meshRenderer.material = blockedGrassMaterial;
+    }
+
+     private void HandleCellTypeChange(Vector2Int coordinates)
+    {
+        var changedPositionFromGrid = _grid.GetPositionFromCoordinates(coordinates);
+        if (transform.position == changedPositionFromGrid)
+        {
+            _meshRenderer.material = blockedGrassMaterial;
+        }
     }
 
     private void OnMouseOver()
@@ -63,11 +82,12 @@ public class Cell : MonoBehaviour
 
     private void SetReferences()
     {
-        
+
         enemyObjectPoolHandler = GameObject.FindObjectOfType<EnemyWavePool>();
         _towerInstantiationManager = GameObject.FindObjectOfType<TowerInstantiationManager>();
         _gold = GameObject.FindObjectOfType<Gold>();
         _grid = GameObject.FindObjectOfType<Grid>();
+        _meshRenderer = GetComponentInChildren<MeshRenderer>();
     }
 
     private void CreateRangeDisplay()
