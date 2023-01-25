@@ -26,7 +26,6 @@ public class StartWaveButton : MonoBehaviour
 
     private void OnEnable()
     {
-        //TODO One Event?
         _enemyObjectPoolHandler.OnWavePhase += HandleWavePhase;
         _enemyObjectPoolHandler.OnBuildPhase += HandleBuildPhase;
         HandleBuildPhase();
@@ -34,7 +33,6 @@ public class StartWaveButton : MonoBehaviour
 
     private void OnDisable()
     {
-        //TODO One Event?
         _enemyObjectPoolHandler.OnWavePhase -= HandleWavePhase;
         _enemyObjectPoolHandler.OnBuildPhase -= HandleBuildPhase;
     }

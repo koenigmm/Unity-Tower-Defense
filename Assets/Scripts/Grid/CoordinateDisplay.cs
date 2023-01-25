@@ -16,7 +16,6 @@ public class CoordinateDisplay : MonoBehaviour
     {
         if (Application.isPlaying) _label.enabled = _bCanShowCoordinatesInPlayMode;
         if (!_bCanShowCoordinatesInPlayMode) return;
-
         DisplayCoordinates();
     }
 
@@ -27,7 +26,6 @@ public class CoordinateDisplay : MonoBehaviour
         if (Application.isPlaying) return;
 
         UpdateObjectName();
-
     }
 
 #endif
@@ -46,11 +44,6 @@ public class CoordinateDisplay : MonoBehaviour
         _label.text = $"{_coordinates.x},{_coordinates.y}";
     }
 
-
-
-    private void UpdateObjectName()
-    {
-        transform.parent.parent.name = _coordinates.ToString();
-    }
+    private void UpdateObjectName() => transform.parent.parent.name = _coordinates.ToString();
 
 }

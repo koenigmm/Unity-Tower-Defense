@@ -50,8 +50,6 @@ public class TowerInstantiationManager : MonoBehaviour
         _gold.DecreaseAmountOfGold(SelectedTower.BuildCost);
         IsInSelectionMode = false;
 
-        //TODO Set tower type in grid
-
         bool needsMoreThanOneCell = SelectedTower.RequiredCellsForBuilding.x > 1 || SelectedTower.RequiredCellsForBuilding.y > 1;
         if (needsMoreThanOneCell)
             _grid.ChangeCellsToTower(position, SelectedTower.RequiredCellsForBuilding.x, SelectedTower.RequiredCellsForBuilding.y);

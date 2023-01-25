@@ -25,11 +25,6 @@ public class Cell : MonoBehaviour
     private void Awake()
     {
         SetReferences();
-        
-
-        // if (initialCellType != CellType.Grass)
-        // Debug.Log(initialCellType + " " + transform.position);
-        // _bIsPlaceable = _grid.CanBuildOnCell(_coordinatesFromGrid);
     }
 
     private void Start()

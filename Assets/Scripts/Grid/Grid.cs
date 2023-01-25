@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
-    //TODO remove | obsolet?
     public Action<Vector2Int> OnCellTypeChange;
     [SerializeField] private Vector2Int gridDimensions;
     [SerializeField] private int _gridSnappingValue = 10;
@@ -63,7 +62,6 @@ public class Grid : MonoBehaviour
         FillGridDictionaryWithInitlalValues();
     }
 
-    // TODO remove?
     public Vector3 GetPositionFromCoordinates(Vector2 coordinates)
     {
         Vector3 position = Vector3.zero;
@@ -102,15 +100,6 @@ public class Grid : MonoBehaviour
             }
         }
     }
-
-    //TODO Remove testing
-    // private void DebugPrintDictionary()
-    // {
-    //     foreach (var cell in _grid)
-    //     {
-    //         Debug.Log(cell.Key + " " + cell.Value);
-    //     }
-    // }
 
     private CellType GetCellTypeForGivenCoordinates(Vector2Int coordinates) => _grid[coordinates];
 }
